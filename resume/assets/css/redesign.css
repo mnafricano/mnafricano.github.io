@@ -586,9 +586,17 @@ h3 {
         padding: 128px 0 64px;
     }
 
+    .hero-copy,
+    h1,
+    .lead {
+        max-width: min(100%, 350px);
+    }
+
     h1 {
-        font-size: 46px;
-        line-height: 1;
+        max-width: 100%;
+        font-size: 34px;
+        line-height: 1.04;
+        overflow-wrap: break-word;
     }
 
     h2 {

@@ -150,6 +150,7 @@
       .site-shell__nav a {
         display: inline-flex;
         align-items: center;
+        text-decoration: none !important;
       }
 
       .site-shell__brand {
@@ -225,18 +226,43 @@
 
       @media (max-width: 640px) {
         .site-shell {
-          align-items: flex-start;
-          border-radius: 24px;
+          align-items: center;
+          width: min(calc(100% - 20px), 360px);
+          min-height: 56px;
+          border-radius: 999px;
+          gap: 8px;
         }
 
         .site-shell__brand strong {
-          max-width: 112px;
-          white-space: normal;
+          display: none;
+        }
+
+        .site-shell__brand {
+          flex: 0 0 auto;
+          padding-right: 0;
+        }
+
+        .site-shell__brand span {
+          width: 38px;
+          height: 38px;
+        }
+
+        .site-shell__nav {
+          flex: 1;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          justify-content: flex-start;
+          scrollbar-width: none;
+        }
+
+        .site-shell__nav::-webkit-scrollbar {
+          display: none;
         }
 
         .site-shell__nav a {
           min-height: 34px;
-          padding: 0 9px;
+          flex: 0 0 auto;
+          padding: 0 10px;
           font-size: 12px;
         }
       }
