@@ -1,14 +1,77 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Home</title>
     <meta charset="UTF-8">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="description" content="A personal collection of projects, experiments, writing, and work by Marcello Africano.">
+    <title>Marcello Africano | Projects</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1><a href="resume" type="link">Resume</a></h1>
-    <h1><a href="super-book" type="link">The Super Book</a></h1>
+    <header class="site-header">
+        <a class="brand" href="/" aria-label="Marcello Africano home">
+            <span class="brand-mark" aria-hidden="true">MA</span>
+            <span>Marcello Africano</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary navigation">
+            <a href="#projects">Projects</a>
+            <a href="resume">Resume</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="page-title">
+            <div class="hero-copy">
+                <p class="eyebrow">Personal workspace</p>
+                <h1 id="page-title">Projects, experiments, and useful things I am building.</h1>
+                <p class="intro">
+                    A growing home for writing, tools, prototypes, and the occasional polished artifact.
+                    Start with the finished pieces, and check back as the shelf fills up.
+                </p>
+                <div class="hero-actions">
+                    <a class="button primary" href="#projects">Browse projects</a>
+                    <a class="button secondary" href="resume">View resume</a>
+                </div>
+            </div>
+            <div class="hero-media" aria-hidden="true">
+                <img src="resume/images/me.jpg" alt="">
+            </div>
+        </section>
+
+        <section class="projects-section" id="projects" aria-labelledby="projects-title">
+            <div class="section-heading">
+                <p class="eyebrow">Featured work</p>
+                <h2 id="projects-title">Current projects</h2>
+            </div>
+
+            <div class="project-grid">
+                <a class="project-card project-book" href="super-book">
+                    <span class="project-kicker">Longform writing</span>
+                    <span class="project-title">The Super Book</span>
+                    <span class="project-description">
+                        A synthesized digital book with chapters, audio narration, and a calm editorial reading experience.
+                    </span>
+                    <span class="project-link">Open project</span>
+                </a>
+
+                <a class="project-card project-resume" href="resume">
+                    <span class="project-kicker">Portfolio</span>
+                    <span class="project-title">Resume</span>
+                    <span class="project-description">
+                        Professional background, selected work, and contact details in one focused place.
+                    </span>
+                    <span class="project-link">View resume</span>
+                </a>
+
+                <div class="project-card project-empty">
+                    <span class="project-kicker">Next up</span>
+                    <span class="project-title">More projects soon</span>
+                    <span class="project-description">
+                        This landing page is ready for apps, essays, experiments, case studies, and whatever comes next.
+                    </span>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
