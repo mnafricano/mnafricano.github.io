@@ -50,9 +50,18 @@
       ];
     }
 
+    if (currentPath.includes('/execution-engine/')) {
+      return [
+        { href: '#loop', label: 'Loop' },
+        { href: '#principles', label: 'Principles' },
+        { href: pathTo('./'), label: 'Home' }
+      ];
+    }
+
     return [
       { href: '#projects', label: 'Projects' },
       { href: pathTo('resume/'), label: 'Resume' },
+      { href: pathTo('execution-engine/'), label: 'Engine' },
       { href: pathTo('super-book/'), label: 'Book' }
     ];
   };

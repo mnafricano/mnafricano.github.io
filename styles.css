@@ -316,6 +316,13 @@ h1 {
         var(--panel-2);
 }
 
+.action-card {
+    background:
+        radial-gradient(circle at 84% 20%, rgba(200, 107, 125, 0.24), transparent 28%),
+        linear-gradient(135deg, rgba(72, 182, 166, 0.2), rgba(211, 154, 74, 0.12)),
+        #1c2326;
+}
+
 .showcase-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -412,6 +419,14 @@ h2 {
     background:
         linear-gradient(145deg, rgba(39, 123, 114, 0.96), rgba(24, 38, 44, 0.94)),
         var(--teal-dark);
+}
+
+.project-execution::before {
+    background:
+        radial-gradient(circle at 74% 18%, rgba(200, 107, 125, 0.28), transparent 28%),
+        radial-gradient(circle at 22% 18%, rgba(72, 182, 166, 0.28), transparent 32%),
+        linear-gradient(145deg, rgba(31, 45, 47, 0.98), rgba(26, 28, 31, 0.92)),
+        var(--panel-2);
 }
 
 .project-empty {
