@@ -52,7 +52,7 @@
 
     if (currentPath.includes('/execution-engine/')) {
       return [
-        { href: '#loop', label: 'Loop' },
+        { href: '#dashboard', label: 'Dashboard' },
         { href: '#principles', label: 'Principles' },
         { href: pathTo('./'), label: 'Home' }
       ];

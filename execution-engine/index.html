@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Execution Engine is an ADHD-friendly project for turning knowledge into visible action.">
+    <meta name="description" content="Execution Engine is an ADHD-friendly dashboard for turning knowledge into visible action.">
     <title>Execution Engine | Marcello Africano</title>
-    <link rel="stylesheet" href="styles.css?v=20260622-execution">
+    <link rel="stylesheet" href="styles.css?v=20260622-dashboard-3">
 </head>
 <body>
     <div class="engine-depth" aria-hidden="true">
@@ -15,85 +15,137 @@
     </div>
 
     <main>
-        <section class="engine-hero" aria-labelledby="page-title">
+        <section class="dashboard-hero" aria-labelledby="page-title">
             <div class="hero-copy">
-                <p class="eyebrow">Behavior tool</p>
+                <p class="eyebrow">Behavior dashboard</p>
                 <h1 id="page-title"><span>Execution</span> <span>Engine</span></h1>
                 <p class="lead">
-                    A system for converting knowledge into motion. It exists for the brutal little gap
-                    between knowing what would help and actually starting.
+                    Convert knowledge into motion. Capture the thing, cut the friction, launch a short sprint,
+                    and close with proof that you touched the work.
                 </p>
                 <div class="hero-actions">
-                    <a class="button primary" href="#loop">Run the loop</a>
-                    <a class="button secondary" href="#principles">Read the principles</a>
+                    <a class="button primary" href="#dashboard">Open dashboard</a>
+                    <button class="button secondary" type="button" data-reset-demo>Reset demo data</button>
                 </div>
             </div>
 
-            <aside class="activation-console" data-parallax="0.03" aria-label="Execution Engine snapshot">
+            <aside class="pulse-console" data-parallax="0.03" aria-label="Execution Engine status">
                 <div class="console-top">
                     <span></span>
                     <span></span>
                     <span></span>
                 </div>
                 <div class="console-body">
-                    <p class="console-label">Current mission</p>
-                    <strong>Make the next action obvious enough to begin.</strong>
-                    <div class="signal-grid" aria-hidden="true">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                    <p class="console-label">Activation state</p>
+                    <strong data-status-title>Ready to launch</strong>
+                    <div class="status-metrics">
+                        <div>
+                            <span data-open-count>0</span>
+                            <small>open loops</small>
+                        </div>
+                        <div>
+                            <span data-proof-count>0</span>
+                            <small>proofs logged</small>
+                        </div>
                     </div>
-                    <div class="launch-meter">
-                        <span style="--fill: 74%;"></span>
+                    <div class="launch-meter" aria-hidden="true">
+                        <span data-meter-fill></span>
                     </div>
                 </div>
             </aside>
         </section>
 
-        <section class="loop-section" id="loop" aria-labelledby="loop-title">
+        <section class="dashboard-section" id="dashboard" aria-labelledby="dashboard-title">
             <div class="section-heading">
-                <p class="eyebrow">The loop</p>
-                <h2 id="loop-title">Do not organize your life. Start the next rep.</h2>
+                <p class="eyebrow">Live dashboard</p>
+                <h2 id="dashboard-title">One mission. One next action. One launch window.</h2>
             </div>
 
-            <div class="loop-board" data-engine-board>
-                <button class="loop-step is-active" type="button" data-step="capture">
-                    <span>01</span>
-                    <strong>Capture</strong>
-                    <small>Put the thought outside your head.</small>
-                </button>
-                <button class="loop-step" type="button" data-step="cut">
-                    <span>02</span>
-                    <strong>Cut friction</strong>
-                    <small>Remove the first thing that makes starting annoying.</small>
-                </button>
-                <button class="loop-step" type="button" data-step="launch">
-                    <span>03</span>
-                    <strong>Launch</strong>
-                    <small>Commit to a timer, not a mood.</small>
-                </button>
-                <button class="loop-step" type="button" data-step="close">
-                    <span>04</span>
-                    <strong>Close</strong>
-                    <small>End with proof, not self-judgment.</small>
-                </button>
-            </div>
+            <div class="dashboard-grid">
+                <section class="panel capture-panel" aria-labelledby="capture-title">
+                    <div class="panel-heading">
+                        <span>01</span>
+                        <h3 id="capture-title">Capture the loop</h3>
+                    </div>
+                    <form data-capture-form>
+                        <label>
+                            <span>What are you avoiding?</span>
+                            <textarea name="mission" rows="4" placeholder="Example: I am avoiding opening the tax document because it feels messy."></textarea>
+                        </label>
+                        <div class="input-row">
+                            <label>
+                                <span>Next physical action</span>
+                                <input name="nextAction" type="text" placeholder="Open the folder">
+                            </label>
+                            <label>
+                                <span>Friction to remove</span>
+                                <input name="friction" type="text" placeholder="Clear the desk">
+                            </label>
+                        </div>
+                        <button class="button primary" type="submit">Add to dashboard</button>
+                    </form>
+                </section>
 
-            <article class="step-detail" data-step-detail>
-                <p class="detail-kicker">Capture</p>
-                <h3>Turn a vague intention into a visible object.</h3>
-                <p>
-                    The brain should not have to hold the mission, the plan, the anxiety, and the first step at once.
-                    Write the exact thing you are avoiding in plain language.
-                </p>
-                <div class="detail-command">Write: "I am avoiding..."</div>
-            </article>
+                <section class="panel active-panel" aria-labelledby="active-title">
+                    <div class="panel-heading">
+                        <span>02</span>
+                        <h3 id="active-title">Active mission</h3>
+                    </div>
+                    <article class="mission-card" data-active-card>
+                        <p class="empty-state">Add a loop or choose one from the queue.</p>
+                    </article>
+                    <div class="action-controls">
+                        <button class="button secondary" type="button" data-cut-friction>Friction removed</button>
+                        <button class="button secondary" type="button" data-complete-task>Mark complete</button>
+                    </div>
+                </section>
+
+                <section class="panel timer-panel" aria-labelledby="timer-title">
+                    <div class="panel-heading">
+                        <span>03</span>
+                        <h3 id="timer-title">Launch timer</h3>
+                    </div>
+                    <div class="timer-face" aria-live="polite" data-timer-display>10:00</div>
+                    <div class="timer-presets" role="group" aria-label="Timer presets">
+                        <button type="button" data-minutes="5">5</button>
+                        <button class="is-active" type="button" data-minutes="10">10</button>
+                        <button type="button" data-minutes="25">25</button>
+                    </div>
+                    <div class="timer-controls">
+                        <button class="button primary" type="button" data-timer-start>Start</button>
+                        <button class="button secondary" type="button" data-timer-pause>Pause</button>
+                        <button class="button secondary" type="button" data-timer-reset>Reset</button>
+                    </div>
+                </section>
+
+                <section class="panel queue-panel" aria-labelledby="queue-title">
+                    <div class="panel-heading">
+                        <span>04</span>
+                        <h3 id="queue-title">Queue</h3>
+                    </div>
+                    <div class="task-list" data-task-list></div>
+                </section>
+
+                <section class="panel proof-panel" aria-labelledby="proof-title">
+                    <div class="panel-heading">
+                        <span>05</span>
+                        <h3 id="proof-title">Proof log</h3>
+                    </div>
+                    <form class="proof-form" data-proof-form>
+                        <label>
+                            <span>What proves you made contact?</span>
+                            <input name="proof" type="text" placeholder="Wrote 3 lines, opened the file, sent the email...">
+                        </label>
+                        <button class="button primary" type="submit">Log proof</button>
+                    </form>
+                    <div class="proof-list" data-proof-list></div>
+                </section>
+            </div>
         </section>
 
         <section class="principles-section" id="principles" aria-labelledby="principles-title">
             <div class="section-heading">
-                <p class="eyebrow">Design principles</p>
+                <p class="eyebrow">Operating rules</p>
                 <h2 id="principles-title">Built for inconsistent activation.</h2>
             </div>
 
@@ -117,7 +169,7 @@
         </section>
     </main>
 
-    <script src="script.js?v=20260622-execution"></script>
+    <script src="script.js?v=20260622-dashboard"></script>
     <script src="../site-effects.js?v=20260622-grandiose"></script>
 </body>
 </html>
