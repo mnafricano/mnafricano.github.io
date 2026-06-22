@@ -1,53 +1,62 @@
 <!DOCTYPE html>
-<html >
-  <head>
-    <meta charset="UTF-8">
-    <title>Vertical Navigation Menu</title>
-    
-    
-    
-    
-        <link rel="stylesheet" href="css/style.css">
-
-    
-    
-    
-  </head>
-
-  <body>
-
-    <!DOCTYPE html> 
-<html> 
+<html lang="en">
 <head>
-	<title>Vertical Menu</title> 
-	<link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css' />
-	<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js" /></script>
-	
-	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet" />
-	<!--[if IE 7]>
-	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome-ie7.min.css" rel="stylesheet" />
-	<![endif]-->
-  
-  
-  </head>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vertical Navigation Menu</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/index.js" defer></script>
+</head>
 <body>
-	<h1>Vertical Menu</h1>
-	
-	<ul class="form">
-		<li><a class="profile" href="#"><i class="icon-user"></i>Edit Profile</a></li>
-		<li class="selected"><a class="messages" href="#"><i class="icon-envelope-alt"></i>Messages <em>5</em></a></li>
-		<li><a class="settings" href="#"><i class="icon-cog"></i>App Settings</a></li>
-		<li><a class="logout" href="#"><i class="icon-signout"></i>Logout</a></li>
-	</ul>
-  
-</body>
-</html>
-    
-        <script src="js/index.js"></script>
+  <main class="demo-shell">
+    <section class="preview-card" aria-labelledby="demo-title">
+      <p class="eyebrow">Menu component</p>
+      <h1 id="demo-title">Vertical Navigation</h1>
+      <p class="intro">A compact app menu with tactile states, badges, keyboard support, and zero external dependencies.</p>
 
-    
-    
-    
-  </body>
+      <nav class="menu-card" aria-label="Application menu">
+        <a class="menu-item profile" href="#profile" aria-current="false">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 12.4a4.4 4.4 0 1 0 0-8.8 4.4 4.4 0 0 0 0 8.8Zm0 2.1c-4 0-7.2 2.1-7.2 4.6v.8h14.4v-.8c0-2.5-3.2-4.6-7.2-4.6Z"/></svg>
+          </span>
+          <span>
+            <strong>Edit Profile</strong>
+            <small>Personal details</small>
+          </span>
+        </a>
+
+        <a class="menu-item messages is-selected" href="#messages" aria-current="page">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4.5 6.2h15a1.7 1.7 0 0 1 1.7 1.7v8.2a1.7 1.7 0 0 1-1.7 1.7h-15a1.7 1.7 0 0 1-1.7-1.7V7.9a1.7 1.7 0 0 1 1.7-1.7Zm7.5 6.4 6.5-4.4h-13l6.5 4.4Zm0 2.1L4.6 9.8v6h14.8v-6L12 14.7Z"/></svg>
+          </span>
+          <span>
+            <strong>Messages</strong>
+            <small>Inbox and alerts</small>
+          </span>
+          <em>5</em>
+        </a>
+
+        <a class="menu-item settings" href="#settings" aria-current="false">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M13.2 2.8 14 5.2c.5.2.9.4 1.3.7l2.4-.7 1.4 2.5-1.8 1.7c.1.5.1 1 .1 1.5s0 1-.1 1.5l1.8 1.7-1.4 2.5-2.4-.7c-.4.3-.8.5-1.3.7l-.8 2.4h-2.8l-.8-2.4c-.5-.2-.9-.4-1.3-.7l-2.4.7-1.4-2.5 1.8-1.7c-.1-.5-.1-1-.1-1.5s0-1 .1-1.5L4.5 7.7l1.4-2.5 2.4.7c.4-.3.8-.5 1.3-.7l.8-2.4h2.8Zm-1.4 6a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Z"/></svg>
+          </span>
+          <span>
+            <strong>App Settings</strong>
+            <small>Preferences</small>
+          </span>
+        </a>
+
+        <a class="menu-item logout" href="#logout" aria-current="false">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 3.7h8.6v2.1H7.1v12.4h6.5v2.1H5V3.7Zm11.1 4 4.4 4.3-4.4 4.3-1.5-1.5 1.8-1.8H10v-2.1h6.4l-1.8-1.8 1.5-1.4Z"/></svg>
+          </span>
+          <span>
+            <strong>Logout</strong>
+            <small>End session</small>
+          </span>
+        </a>
+      </nav>
+    </section>
+  </main>
+</body>
 </html>

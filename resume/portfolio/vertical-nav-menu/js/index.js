@@ -1,9 +1,17 @@
-	$(document).ready(function() {
-		$('ul.form li a').click(
-			function(e) {
-				e.preventDefault(); // prevent the default action
-				e.stopPropagation; // stop the click from bubbling
-				$(this).closest('ul').find('.selected').removeClass('selected');
-				$(this).parent().addClass('selected');
-			});
-	});
+(() => {
+  const menuItems = document.querySelectorAll('.menu-item');
+
+  menuItems.forEach((item) => {
+    item.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      menuItems.forEach((link) => {
+        link.classList.remove('is-selected');
+        link.setAttribute('aria-current', 'false');
+      });
+
+      item.classList.add('is-selected');
+      item.setAttribute('aria-current', 'page');
+    });
+  });
+})();
