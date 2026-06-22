@@ -50,6 +50,30 @@
     background: radial-gradient(ellipse at 50% 60%, rgba(139,69,19,0.18) 0%, transparent 70%);
     pointer-events: none;
   }
+  .book-depth {
+    position: absolute;
+    display: block;
+    border: 1px solid rgba(248,245,239,0.08);
+    background: rgba(248,245,239,0.035);
+    pointer-events: none;
+    transform: translate3d(0, var(--parallax-y, 0), 0) rotate(var(--book-rotate));
+  }
+  .book-depth-one {
+    width: 220px;
+    height: 300px;
+    left: 8vw;
+    top: 18vh;
+    border-radius: 28px;
+    --book-rotate: -14deg;
+  }
+  .book-depth-two {
+    width: 360px;
+    height: 150px;
+    right: -90px;
+    bottom: 16vh;
+    border-radius: 999px;
+    --book-rotate: 9deg;
+  }
   .cover-mark {
     width: 72px;
     height: 72px;
@@ -57,6 +81,7 @@
     border-radius: 50%;
     margin-bottom: 34px;
     position: relative;
+    transform: translate3d(0, var(--parallax-y, 0), 0);
   }
   .cover-mark::before,
   .cover-mark::after {
@@ -392,6 +417,14 @@
     .insight { margin: 40px -24px; padding: 28px 24px; }
     .pullquote { padding-left: 20px; }
     .cover, .part-header, .toc-section { padding: 60px 24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .book-depth,
+    .cover-mark {
+      transform: none;
+    }
   }
 
 

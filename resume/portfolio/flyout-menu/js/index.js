@@ -4,7 +4,7 @@
 
   if (!button || !flyout) return;
 
-  const items = flyout.querySelectorAll('a');
+  const items = flyout.querySelectorAll('button');
 
   button.addEventListener('click', (event) => {
     event.preventDefault();

@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="styles.css?v=20260621-project-hub">
 </head>
 <body>
+    <div class="depth-field" aria-hidden="true">
+        <span class="depth-shape depth-one" data-parallax="0.08"></span>
+        <span class="depth-shape depth-two" data-parallax="0.14"></span>
+        <span class="depth-shape depth-three" data-parallax="0.2"></span>
+    </div>
+
     <header class="site-header">
         <a class="brand" href="/" aria-label="Marcello Africano home">
             <span class="brand-mark" aria-hidden="true">MA</span>
@@ -33,7 +39,7 @@
                     <a class="button secondary" href="resume">View resume</a>
                 </div>
             </div>
-            <div class="project-showcase" aria-hidden="true">
+            <div class="project-showcase" data-parallax="0.035" aria-hidden="true">
                 <div class="showcase-toolbar">
                     <span></span>
                     <span></span>
@@ -66,7 +72,7 @@
             </div>
 
             <div class="project-grid">
-                <a class="project-card project-book" href="super-book">
+                <a class="project-card project-book" href="super-book" data-parallax="0.018">
                     <span class="project-kicker">Longform writing</span>
                     <span class="project-title">The Super Book</span>
                     <span class="project-description">
@@ -75,7 +81,7 @@
                     <span class="project-link">Open project</span>
                 </a>
 
-                <a class="project-card project-resume" href="resume">
+                <a class="project-card project-resume" href="resume" data-parallax="0.026">
                     <span class="project-kicker">Portfolio</span>
                     <span class="project-title">Resume</span>
                     <span class="project-description">
@@ -84,7 +90,7 @@
                     <span class="project-link">View resume</span>
                 </a>
 
-                <div class="project-card project-empty">
+                <div class="project-card project-empty" data-parallax="0.012">
                     <span class="project-kicker">Next up</span>
                     <span class="project-title">More projects soon</span>
                     <span class="project-description">
@@ -94,5 +100,6 @@
             </div>
         </section>
     </main>
+    <script src="site-effects.js"></script>
 </body>
 </html>

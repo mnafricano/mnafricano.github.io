@@ -100,11 +100,13 @@ h1 a:hover {
 .flyout-wrap .flyout > li:nth-of-type(6) {
   transform: rotate(90deg);
 }
-.flyout-wrap .flyout > li a {
+.flyout-wrap .flyout > li button {
+  appearance: none;
   position: absolute;
   display: block;
   width: 26px;
   height: 26px;
+  padding: 0;
   overflow: hidden;
   text-indent: -99999px;
   background: #444;
@@ -112,14 +114,14 @@ h1 a:hover {
   border-radius: 50%;
   box-shadow: rgba(0, 0, 0, 0.4) 0 0 5px 0, rgba(0, 0, 0, 0.2) 0 0 0 1px, inset rgba(0, 0, 0, 0.5) 0 0 2px 0;
 }
-.flyout-wrap .flyout > li a:active {
+.flyout-wrap .flyout > li button:active {
   background: #000;
   border-color: #555;
 }
-.flyout-wrap .flyout > li a:active span {
+.flyout-wrap .flyout > li button:active span {
   opacity: .3;
 }
-.flyout-wrap .flyout > li a span {
+.flyout-wrap .flyout > li button span {
   display: block;
   width: 26px;
   height: 26px;
@@ -129,129 +131,131 @@ h1 a:hover {
 .flyout-wrap .flyout-init li {
   display: none;
 }
-.flyout-wrap .flyout li a {
+.flyout-wrap .flyout li button {
   top: 150px;
   animation: contract 0.35s ease-out 1 backwards;
 }
-.flyout-wrap .flyout.expand li a {
+.flyout-wrap .flyout.expand li button {
   top: 10px;
   animation: expand .6s ease 1 backwards;
 }
-.flyout-wrap .flyout.fade li a.clicked {
+.flyout-wrap .flyout.fade li button.clicked {
   top: 10px;
   animation: clicked 0.5s ease-out 1 forwards;
 }
-.flyout-wrap .flyout.fade li a:not(.clicked) {
+.flyout-wrap .flyout.fade li button:not(.clicked) {
   top: 10px;
   animation: fade 0.5s ease-out 1 forwards;
 }
-.flyout-wrap .flyout.fade li a:not(.clicked) span {
+.flyout-wrap .flyout.fade li button:not(.clicked) span {
   opacity: .1;
   transition: opacity .5s ease;
 }
-.flyout-wrap .flyout li:nth-of-type(1) a {
+.flyout-wrap .flyout li:nth-of-type(1) button {
   animation-delay: 0.2s;
 }
-.flyout-wrap .flyout li:nth-of-type(1) a:not(.clicked) span {
+.flyout-wrap .flyout li:nth-of-type(1) button:not(.clicked) span {
   animation: spin1-contract .9s ease-out 1 backwards;
 }
-.flyout-wrap .flyout.expand li:nth-of-type(1) a {
+.flyout-wrap .flyout.expand li:nth-of-type(1) button {
   animation-delay: 0s;
 }
-.flyout-wrap .flyout.expand li:nth-of-type(1) a span {
+.flyout-wrap .flyout.expand li:nth-of-type(1) button span {
   transform: rotate(0deg);
   animation: spin1-expand .6s ease-out 1 backwards;
 }
-.flyout-wrap .flyout.fade li:nth-of-type(1) a.clicked span {
+.flyout-wrap .flyout.fade li:nth-of-type(1) button.clicked span {
   transform: rotate(0deg);
 }
-.flyout-wrap .flyout li:nth-of-type(2) a {
+.flyout-wrap .flyout li:nth-of-type(2) button {
   animation-delay: 0.16s;
 }
-.flyout-wrap .flyout li:nth-of-type(2) a:not(.clicked) span {
+.flyout-wrap .flyout li:nth-of-type(2) button:not(.clicked) span {
   animation: spin2-contract .9s ease-out 1 backwards;
 }
-.flyout-wrap .flyout.expand li:nth-of-type(2) a {
+.flyout-wrap .flyout.expand li:nth-of-type(2) button {
   animation-delay: 0.04s;
 }
-.flyout-wrap .flyout.expand li:nth-of-type(2) a span {
+.flyout-wrap .flyout.expand li:nth-of-type(2) button span {
   transform: rotate(-18deg);
   animation: spin2-expand .6s ease-out 1 backwards;
 }
-.flyout-wrap .flyout.fade li:nth-of-type(2) a.clicked span {
+.flyout-wrap .flyout.fade li:nth-of-type(2) button.clicked span {
   transform: rotate(-18deg);
 }
-.flyout-wrap .flyout li:nth-of-type(3) a {
+.flyout-wrap .flyout li:nth-of-type(3) button {
   animation-delay: 0.12s;
 }
-.flyout-wrap .flyout li:nth-of-type(3) a:not(.clicked) span {
+.flyout-wrap .flyout li:nth-of-type(3) button:not(.clicked) span {
   animation: spin3-contract .9s ease-out 1 backwards;
 }
-.flyout-wrap .flyout.expand li:nth-of-type(3) a {
+.flyout-wrap .flyout.expand li:nth-of-type(3) button {
   animation-delay: 0.08s;
 }
-.flyout-wrap .flyout.expand li:nth-of-type(3) a span {
+.flyout-wrap .flyout.expand li:nth-of-type(3) button span {
   transform: rotate(-36deg);
   animation: spin3-expand .6s ease-out 1 backwards;
 }
-.flyout-wrap .flyout.fade li:nth-of-type(3) a.clicked span {
+.flyout-wrap .flyout.fade li:nth-of-type(3) button.clicked span {
   transform: rotate(-36deg);
 }
-.flyout-wrap .flyout li:nth-of-type(4) a {
+.flyout-wrap .flyout li:nth-of-type(4) button {
   animation-delay: 0.08s;
 }
-.flyout-wrap .flyout li:nth-of-type(4) a:not(.clicked) span {
+.flyout-wrap .flyout li:nth-of-type(4) button:not(.clicked) span {
   animation: spin4-contract .9s ease-out 1 backwards;
 }
-.flyout-wrap .flyout.expand li:nth-of-type(4) a {
+.flyout-wrap .flyout.expand li:nth-of-type(4) button {
   animation-delay: 0.12s;
 }
-.flyout-wrap .flyout.expand li:nth-of-type(4) a span {
+.flyout-wrap .flyout.expand li:nth-of-type(4) button span {
   transform: rotate(-54deg);
   animation: spin4-expand .6s ease-out 1 backwards;
 }
-.flyout-wrap .flyout.fade li:nth-of-type(4) a.clicked span {
+.flyout-wrap .flyout.fade li:nth-of-type(4) button.clicked span {
   transform: rotate(-54deg);
 }
-.flyout-wrap .flyout li:nth-of-type(5) a {
+.flyout-wrap .flyout li:nth-of-type(5) button {
   animation-delay: 0.04s;
 }
-.flyout-wrap .flyout li:nth-of-type(5) a:not(.clicked) span {
+.flyout-wrap .flyout li:nth-of-type(5) button:not(.clicked) span {
   animation: spin5-contract .9s ease-out 1 backwards;
 }
-.flyout-wrap .flyout.expand li:nth-of-type(5) a {
+.flyout-wrap .flyout.expand li:nth-of-type(5) button {
   animation-delay: 0.16s;
 }
-.flyout-wrap .flyout.expand li:nth-of-type(5) a span {
+.flyout-wrap .flyout.expand li:nth-of-type(5) button span {
   transform: rotate(-72deg);
   animation: spin5-expand .6s ease-out 1 backwards;
 }
-.flyout-wrap .flyout.fade li:nth-of-type(5) a.clicked span {
+.flyout-wrap .flyout.fade li:nth-of-type(5) button.clicked span {
   transform: rotate(-72deg);
 }
-.flyout-wrap .flyout li:nth-of-type(6) a {
+.flyout-wrap .flyout li:nth-of-type(6) button {
   animation-delay: 0s;
 }
-.flyout-wrap .flyout li:nth-of-type(6) a:not(.clicked) span {
+.flyout-wrap .flyout li:nth-of-type(6) button:not(.clicked) span {
   animation: spin6-contract .9s ease-out 1 backwards;
 }
-.flyout-wrap .flyout.expand li:nth-of-type(6) a {
+.flyout-wrap .flyout.expand li:nth-of-type(6) button {
   animation-delay: 0.2s;
 }
-.flyout-wrap .flyout.expand li:nth-of-type(6) a span {
+.flyout-wrap .flyout.expand li:nth-of-type(6) button span {
   transform: rotate(-90deg);
   animation: spin6-expand .6s ease-out 1 backwards;
 }
-.flyout-wrap .flyout.fade li:nth-of-type(6) a.clicked span {
+.flyout-wrap .flyout.fade li:nth-of-type(6) button.clicked span {
   transform: rotate(-90deg);
 }
 .flyout-wrap .flyout-btn {
+  appearance: none;
   position: absolute;
   bottom: 0;
   left: 0;
   z-index: 9999;
   width: 36px;
   height: 36px;
+  padding: 0;
   overflow: hidden;
   text-indent: -99999px;
   background: #f76f54;

@@ -9,7 +9,7 @@
 	body {
 		background-image: url("images/bg.jpg");
 		background-size: cover;
-		-ms-behavior: url("assets/js/ie/backgroundsize.min.htc");
+		-ms-behavior: url("../js/ie/backgroundsize.min.htc");
 	}
 
 /* Section/Article */
