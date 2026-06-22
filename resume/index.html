@@ -1,138 +1,165 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Marcello Africano</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	</head>
-	<body>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Interactive resume and project archive for Marcello Africano.">
+    <title>Marcello Africano | Interactive Resume</title>
+    <link rel="stylesheet" href="assets/css/redesign.css">
+</head>
+<body>
+    <div class="ambient" aria-hidden="true">
+        <span class="plane plane-one" data-depth="0.12"></span>
+        <span class="plane plane-two" data-depth="0.22"></span>
+        <span class="plane plane-three" data-depth="0.34"></span>
+    </div>
 
-		<!-- Wrapper-->
-			<div id="wrapper">
+    <header class="topbar">
+        <a class="home-link" href="../">MA</a>
+        <nav class="section-nav" aria-label="Resume sections">
+            <a href="#profile">Profile</a>
+            <a href="#work">Work</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-				<!-- Nav -->
-					<nav id="nav">
-						<a href="#me" class="icon fa-home active"><span>Home</span></a>
-						<a href="#work" class="icon fa-folder"><span>Work</span></a>
-						<a href="#contact" class="icon fa-envelope"><span>Contact</span></a>
-						<a href="#" class="icon fa-twitter"><span>Twitter</span></a>
-					</nav>
+    <main>
+        <section class="hero-section" id="profile" data-section>
+            <div class="hero-copy">
+                <p class="eyebrow">Interactive resume</p>
+                <h1>Marcello Africano builds interfaces with a service mindset.</h1>
+                <p class="lead">
+                    Web developer, UI experimenter, and hospitality-trained collaborator. I like crisp details,
+                    usable interactions, and pages that feel good under the cursor.
+                </p>
+                <div class="hero-actions">
+                    <a class="button primary" href="#projects">Explore work</a>
+                    <a class="button secondary" href="mailto:mnafricano@gmail.com">Start a conversation</a>
+                </div>
+            </div>
 
-				<!-- Main -->
-					<div id="main">
+            <aside class="identity-card tactile-card" data-tilt>
+                <div class="status-row">
+                    <span class="status-dot"></span>
+                    <span>Available for thoughtful web work</span>
+                </div>
+                <div class="portrait-orbit" aria-hidden="true">
+                    <span></span>
+                    <strong>MA</strong>
+                </div>
+                <dl class="quick-facts">
+                    <div>
+                        <dt>Focus</dt>
+                        <dd>Frontend interfaces</dd>
+                    </div>
+                    <div>
+                        <dt>Style</dt>
+                        <dd>Clean, tactile, responsive</dd>
+                    </div>
+                    <div>
+                        <dt>Background</dt>
+                        <dd>Web development + hospitality</dd>
+                    </div>
+                </dl>
+            </aside>
+        </section>
 
-						<!-- Me -->
-							<article id="me" class="panel">
-								<header>
-									<h1>Marcello Africano</h1>
-									<p>Web Developer & Barista </p>
-								</header>
-								<a href="#work" class="jumplink pic">
-									<span class="arrow icon fa-chevron-right"><span>See my work</span></span>
-									<img src="images/me.jpg" alt="" />
-								</a>
-							</article>
+        <section class="resume-grid" id="work" data-section>
+            <div class="section-heading sticky-heading">
+                <p class="eyebrow">What I bring</p>
+                <h2>Practical web work with an eye for how people actually use things.</h2>
+            </div>
 
-						<!-- Work -->
-							<article id="work" class="panel">
-								<header>
-									<h2>Work</h2>
-								</header>
-								<p>
-									Here are some of the things I have done using HTML, CSS, and JavaScript. Click on the pictures for the full demos.
-								</p>
-								<section>
-									<div class="row">
-										<div class="4u 12u$(mobile)">
-											<a href="portfolio/vertical-nav-menu" class="image fit"><img src="images/vertical-nav-menu.png" alt=""></a>
-										</div>
-										<div class="4u 12u$(mobile)">
-											<a href="portfolio/flyout-menu" class="image fit"><img src="images/flyout-menu.png" alt=""></a>
-										</div>
-										<div class="4u$ 12u$(mobile)">
-											<a href="portfolio/twitter-button-concept" class="image fit"><img src="images/twitter-button-concept.png" alt=""></a>
-										</div>
-										<div class="4u 12u$(mobile)">
-											<a href="portfolio/nav-transformicons" class="image fit"><img src="images/nav-transformicons.png" alt=""></a>
-										</div>
-										<div class="4u 12u$(mobile)">
-											<a href="#" class="image fit"><img src="images/pic05.jpg" alt=""></a>
-										</div>
-										<div class="4u$ 12u$(mobile)">
-											<a href="#" class="image fit"><img src="images/pic06.jpg" alt=""></a>
-										</div>
-										<div class="4u 12u$(mobile)">
-											<a href="#" class="image fit"><img src="images/pic07.jpg" alt=""></a>
-										</div>
-										<div class="4u 12u$(mobile)">
-											<a href="#" class="image fit"><img src="images/pic08.jpg" alt=""></a>
-										</div>
-										<div class="4u$ 12u$(mobile)">
-											<a href="#" class="image fit"><img src="images/pic09.jpg" alt=""></a>
-										</div>
-										<div class="4u 12u$(mobile)">
-											<a href="#" class="image fit"><img src="images/pic10.jpg" alt=""></a>
-										</div>
-										<div class="4u 12u$(mobile)">
-											<a href="#" class="image fit"><img src="images/pic11.jpg" alt=""></a>
-										</div>
-										<div class="4u$ 12u$(mobile)">
-											<a href="#" class="image fit"><img src="images/pic12.jpg" alt=""></a>
-										</div>
-									</div>
-								</section>
-							</article>
+            <div class="stack">
+                <article class="experience-card tactile-card" data-tilt>
+                    <span class="card-number">01</span>
+                    <h3>Interface Development</h3>
+                    <p>
+                        HTML, CSS, and JavaScript work across menus, navigation patterns, animated buttons,
+                        and focused single-page experiences.
+                    </p>
+                </article>
 
-						<!-- Contact -->
-							<article id="contact" class="panel">
-								<header>
-									<h2>Contact Me</h2>
-								</header>
-								<form action="email.php" method="post">
-									<div>
-										<div class="row">
-											<div class="6u 12u$(mobile)">
-												<input type="text" name="name" placeholder="Name" />
-											</div>
-											<div class="6u$ 12u$(mobile)">
-												<input type="text" name="email" placeholder="Email" />
-											</div>
-											<div class="12u$">
-												<input type="text" name="subject" placeholder="Subject" />
-											</div>
-											<div class="12u$">
-												<textarea name="message" placeholder="Message" rows="8"></textarea>
-											</div>
-											<div class="12u$">
-												<input type="submit" value="Send Message" />
-											</div>
-										</div>
-									</div>
-								</form>
-							</article>
+                <article class="experience-card tactile-card" data-tilt>
+                    <span class="card-number">02</span>
+                    <h3>Interaction Design</h3>
+                    <p>
+                        I care about the hand-feel of the web: motion, feedback, timing, hover states,
+                        readable hierarchy, and layouts that do not fight the user.
+                    </p>
+                </article>
 
-					</div>
+                <article class="experience-card tactile-card" data-tilt>
+                    <span class="card-number">03</span>
+                    <h3>Service Mindset</h3>
+                    <p>
+                        Barista experience sharpened the human side of the work: listening well, moving fast,
+                        handling pressure, and making the next interaction easier.
+                    </p>
+                </article>
+            </div>
+        </section>
 
-				<!-- Footer -->
-					<div id="footer">
-						<ul class="copyright">
-							<li>&copy; 2015 Marcello Africano</li>
-						</ul>
-					</div>
+        <section class="skills-strip" aria-label="Skills">
+            <div class="marquee" data-marquee>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>Responsive UI</span>
+                <span>Interaction polish</span>
+                <span>Accessibility basics</span>
+                <span>Prototyping</span>
+                <span>Customer empathy</span>
+            </div>
+        </section>
 
-			</div>
+        <section class="projects-section" id="projects" data-section>
+            <div class="section-heading">
+                <p class="eyebrow">Selected prototypes</p>
+                <h2>Small builds, real interaction practice.</h2>
+            </div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/skel-viewport.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+            <div class="project-grid">
+                <a class="project-card tactile-card" href="portfolio/vertical-nav-menu" data-tilt>
+                    <img src="images/vertical-nav-menu.png" alt="Vertical navigation menu screenshot">
+                    <span>Navigation UI</span>
+                    <strong>Vertical Nav Menu</strong>
+                </a>
 
-	</body>
+                <a class="project-card tactile-card" href="portfolio/flyout-menu" data-tilt>
+                    <img src="images/flyout-menu.png" alt="Flyout menu screenshot">
+                    <span>CSS Motion</span>
+                    <strong>Flyout Menu</strong>
+                </a>
+
+                <a class="project-card tactile-card" href="portfolio/twitter-button-concept" data-tilt>
+                    <img src="images/twitter-button-concept.png" alt="Twitter follow button concept screenshot">
+                    <span>Microinteraction</span>
+                    <strong>Twitter Button Concept</strong>
+                </a>
+
+                <a class="project-card tactile-card" href="portfolio/nav-transformicons" data-tilt>
+                    <img src="images/nav-transformicons.png" alt="Navigation transform icons screenshot">
+                    <span>Icon Systems</span>
+                    <strong>Nav Transformicons</strong>
+                </a>
+            </div>
+        </section>
+
+        <section class="contact-section" id="contact" data-section>
+            <div class="contact-card tactile-card" data-tilt>
+                <p class="eyebrow">Contact</p>
+                <h2>Have a project, role, or weird little interface idea?</h2>
+                <p>
+                    Send me a note. I am interested in web projects that need taste, patience,
+                    and a little bit of motion.
+                </p>
+                <a class="button primary" href="mailto:mnafricano@gmail.com">Email Marcello</a>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/js/redesign.js"></script>
+</body>
 </html>
