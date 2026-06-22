@@ -15,7 +15,7 @@
   ].join(',');
 
   const pathTo = (path) => {
-    const base = document.querySelector('script[src$="site-effects.js"]')?.getAttribute('src') || 'site-effects.js';
+    const base = document.querySelector('script[src*="site-effects.js"]')?.getAttribute('src') || 'site-effects.js';
     const depth = base.split('/').filter((part) => part === '..').length;
     return `${'../'.repeat(depth)}${path}`;
   };
@@ -124,6 +124,7 @@
       }
 
       .site-shell {
+        box-sizing: border-box !important;
         position: fixed;
         top: 14px;
         left: 50%;
@@ -135,28 +136,65 @@
         justify-content: space-between;
         gap: 14px;
         padding: 8px 10px;
-        border: 1px solid rgba(245, 239, 231, 0.18);
+        border: 1px solid rgba(245, 239, 231, 0.16);
         border-radius: 999px;
-        background: rgba(12, 15, 18, 0.68);
+        background: linear-gradient(180deg, rgba(23, 25, 27, 0.96), rgba(14, 16, 18, 0.96));
         color: #f5efe7;
-        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+        font-size: 14px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+        letter-spacing: 0 !important;
+        line-height: 1 !important;
+        text-align: left !important;
+        text-transform: none !important;
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+        -webkit-backdrop-filter: blur(18px) saturate(1.12);
         backdrop-filter: blur(18px);
         transform: translateX(-50%);
+        isolation: isolate;
         view-transition-name: site-shell;
       }
 
+      .site-shell,
+      .site-shell *,
+      .site-shell *::before,
+      .site-shell *::after {
+        box-sizing: border-box !important;
+      }
+
       .site-shell__brand,
-      .site-shell__nav,
       .site-shell__nav a {
+        appearance: none !important;
+        border: 0 !important;
+        box-shadow: none !important;
         display: inline-flex;
         align-items: center;
+        flex-shrink: 0;
+        font-family: inherit !important;
+        font-style: normal !important;
+        line-height: 1 !important;
+        margin: 0 !important;
         text-decoration: none !important;
+        text-shadow: none !important;
+        text-transform: none !important;
+      }
+
+      .site-shell__brand,
+      .site-shell__brand:hover,
+      .site-shell__brand:visited,
+      .site-shell__nav a,
+      .site-shell__nav a:hover,
+      .site-shell__nav a:visited {
+        color: inherit !important;
       }
 
       .site-shell__brand {
         gap: 10px;
         min-width: 0;
         padding-right: 8px;
+        background: transparent !important;
+        cursor: pointer;
       }
 
       .site-shell__brand span {
@@ -171,6 +209,7 @@
         font-size: 12px;
         font-weight: 900;
         letter-spacing: 0.08em;
+        line-height: 1 !important;
       }
 
       .site-shell__brand strong {
@@ -184,18 +223,30 @@
       }
 
       .site-shell__nav {
+        box-sizing: border-box !important;
+        display: inline-flex !important;
+        align-items: center;
         gap: 4px;
         flex-wrap: wrap;
         justify-content: flex-end;
+        margin: 0 !important;
+        padding: 0 !important;
       }
 
       .site-shell__nav a {
         min-height: 38px;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
         padding: 0 12px;
         border-radius: 999px;
         color: rgba(245, 239, 231, 0.72);
         font-size: 13px;
         font-weight: 760;
+        letter-spacing: 0 !important;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
       }
 
       .site-shell__nav a:hover,
@@ -227,10 +278,14 @@
       @media (max-width: 640px) {
         .site-shell {
           align-items: center;
-          width: min(calc(100% - 20px), 360px);
+          left: 10px;
+          right: 10px;
+          width: auto;
           min-height: 56px;
           border-radius: 999px;
           gap: 8px;
+          padding: 8px 9px;
+          transform: none;
         }
 
         .site-shell__brand strong {
