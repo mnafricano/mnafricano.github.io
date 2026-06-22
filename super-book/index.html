@@ -9,439 +9,12 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>The Super Book — A Synthesis of Human Knowledge</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap');
-
-  :root {
-    --ink: #1a1814;
-    --ink-mid: #4a4640;
-    --ink-light: #7a7570;
-    --page: #f8f5ef;
-    --page-warm: #f0ebe0;
-    --accent: #8b4513;
-    --accent-light: #c47a3a;
-    --rule: #d4cfc5;
-    --chapter-bg: #2a2420;
-    --chapter-text: #f8f5ef;
-    --max: 720px;
-    --wide: 900px;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--page);
-    color: var(--ink);
-    font-family: 'Lora', Georgia, serif;
-    font-size: 19px;
-    line-height: 1.85;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* ── COVER ── */
-  .cover {
-    background: var(--chapter-bg);
-    color: var(--chapter-text);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 80px 40px;
-    position: relative;
-    overflow: hidden;
-  }
-  .cover::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 60%, rgba(139,69,19,0.18) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .cover-eyebrow {
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent-light);
-    margin-bottom: 32px;
-  }
-  .cover-title {
-    font-family: 'Lora', serif;
-    font-size: clamp(42px, 7vw, 82px);
-    font-weight: 600;
-    line-height: 1.1;
-    color: #f8f5ef;
-    max-width: 700px;
-    margin-bottom: 28px;
-    letter-spacing: -0.01em;
-  }
-  .cover-subtitle {
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 22px;
-    color: rgba(248,245,239,0.6);
-    max-width: 520px;
-    line-height: 1.6;
-    margin-bottom: 60px;
-  }
-  .cover-divider {
-    width: 48px;
-    height: 1px;
-    background: var(--accent-light);
-    margin: 0 auto 60px;
-  }
-  .cover-note {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: rgba(248,245,239,0.4);
-    letter-spacing: 0.04em;
-  }
-
-  /* ── TOC ── */
-  .toc-section {
-    background: var(--page-warm);
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    padding: 80px 40px;
-  }
-  .toc-inner {
-    max-width: var(--max);
-    margin: 0 auto;
-  }
-  .toc-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-bottom: 36px;
-  }
-  .toc-entry {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--rule);
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.15s;
-  }
-  .toc-entry:hover { color: var(--accent); }
-  .toc-num {
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--accent);
-    min-width: 28px;
-  }
-  .toc-part {
-    font-family: 'Lora', serif;
-    font-size: 17px;
-    flex: 1;
-  }
-  .toc-dots {
-    flex: 1;
-    border-bottom: 1px dotted var(--rule);
-    margin: 0 8px;
-    transform: translateY(-4px);
-  }
-
-  /* ── PART HEADER ── */
-  .part-header {
-    background: var(--chapter-bg);
-    color: var(--chapter-text);
-    padding: 100px 40px 80px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .part-header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 80%, rgba(139,69,19,0.12) 0%, transparent 65%);
-    pointer-events: none;
-  }
-  .part-eyebrow {
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--accent-light);
-    margin-bottom: 20px;
-  }
-  .part-title {
-    font-family: 'Lora', serif;
-    font-size: clamp(28px, 5vw, 54px);
-    font-weight: 600;
-    line-height: 1.15;
-    color: #f8f5ef;
-    max-width: 640px;
-    margin: 0 auto 24px;
-  }
-  .part-premise {
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 19px;
-    color: rgba(248,245,239,0.55);
-    max-width: 500px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-
-  /* ── BODY TEXT ── */
-  .chapter {
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 80px 40px;
-  }
-
-  .chapter-title {
-    font-family: 'Lora', serif;
-    font-size: 30px;
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 10px;
-    line-height: 1.25;
-  }
-  .chapter-rule {
-    width: 40px;
-    height: 2px;
-    background: var(--accent);
-    margin-bottom: 36px;
-  }
-
-  p {
-    margin-bottom: 1.6em;
-  }
-
-  .drop-cap::first-letter {
-    float: left;
-    font-family: 'Lora', serif;
-    font-size: 72px;
-    font-weight: 600;
-    line-height: 0.78;
-    color: var(--accent);
-    margin-right: 10px;
-    margin-top: 8px;
-  }
-
-  /* ── PULL QUOTES ── */
-  .pullquote {
-    border-left: 3px solid var(--accent);
-    margin: 48px 0;
-    padding: 8px 0 8px 32px;
-  }
-  .pullquote p {
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 23px;
-    line-height: 1.55;
-    color: var(--ink-mid);
-    margin: 0;
-  }
-  .pullquote cite {
-    display: block;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-top: 14px;
-    font-style: normal;
-  }
-
-  /* ── ANALOGY BOXES ── */
-  .analogy {
-    background: var(--page-warm);
-    border: 1px solid var(--rule);
-    border-radius: 6px;
-    padding: 28px 32px;
-    margin: 40px 0;
-    position: relative;
-  }
-  .analogy::before {
-    content: 'ANALOGY';
-    position: absolute;
-    top: -1px;
-    left: 24px;
-    background: var(--accent);
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    padding: 3px 10px;
-    border-radius: 0 0 4px 4px;
-  }
-  .analogy p {
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 17px;
-    line-height: 1.7;
-    color: var(--ink-mid);
-    margin: 0;
-  }
-
-  /* ── SECTION DIVIDER ── */
-  .section-break {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin: 56px 0;
-    color: var(--rule);
-  }
-  .section-break::before,
-  .section-break::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--rule);
-  }
-  .section-break span {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    color: var(--accent-light);
-  }
-
-  /* ── KEY INSIGHT STRIP ── */
-  .insight {
-    background: var(--chapter-bg);
-    color: var(--chapter-text);
-    padding: 36px 40px;
-    margin: 48px -40px;
-    position: relative;
-  }
-  .insight-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent-light);
-    margin-bottom: 12px;
-  }
-  .insight p {
-    font-family: 'Lora', serif;
-    font-size: 20px;
-    line-height: 1.6;
-    color: rgba(248,245,239,0.9);
-    margin: 0;
-  }
-
-  /* ── SUBHEADINGS ── */
-  h3 {
-    font-family: 'Lora', serif;
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--ink);
-    margin: 48px 0 18px;
-  }
-  h4 {
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 36px 0 14px;
-  }
-
-  /* ── CLOSING ── */
-  .coda {
-    background: var(--chapter-bg);
-    color: var(--chapter-text);
-    padding: 120px 40px;
-    text-align: center;
-  }
-  .coda-inner { max-width: 580px; margin: 0 auto; }
-  .coda h2 {
-    font-family: 'Lora', serif;
-    font-size: 38px;
-    font-weight: 600;
-    color: #f8f5ef;
-    margin-bottom: 28px;
-  }
-  .coda p {
-    font-style: italic;
-    font-size: 20px;
-    color: rgba(248,245,239,0.65);
-    line-height: 1.7;
-  }
-
-  hr.chapter-sep {
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: 0;
-  }
-
-  @media (max-width: 640px) {
-    body { font-size: 17px; }
-    .chapter { padding: 60px 24px; }
-    .insight { margin: 40px -24px; padding: 28px 24px; }
-    .pullquote { padding-left: 20px; }
-    .cover, .part-header, .toc-section { padding: 60px 24px; }
-  }
-
-
-  /* ── AUDIO NARRATION ── */
-  .audio-panel {
-    background: var(--page-warm);
-    border: 1px solid var(--rule);
-    border-radius: 10px;
-    padding: 18px 20px;
-    margin: 28px 0 36px;
-    font-family: 'Inter', sans-serif;
-  }
-  .audio-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-  .listen-btn {
-    appearance: none;
-    border: 1px solid var(--accent);
-    background: var(--accent);
-    color: #fff;
-    border-radius: 999px;
-    padding: 10px 16px;
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-    cursor: pointer;
-  }
-  .listen-btn:hover { background: var(--accent-light); border-color: var(--accent-light); }
-  .audio-title {
-    font-size: 12px;
-    color: var(--ink-light);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-  .chapter-audio {
-    width: 100%;
-    margin-top: 14px;
-  }
-  .audio-missing {
-    font-size: 12px;
-    color: var(--ink-light);
-    margin-top: 10px;
-    display: none;
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <!-- ═══════════════════════════════════════════ COVER -->
 <div class="cover">
+<div class="cover-mark" aria-hidden="true"></div>
 <div class="cover-eyebrow">A Synthesis of 100 Essential Works</div>
 <h1 class="cover-title">Everything You Need to Know to Be Human</h1>
 <div class="cover-divider"></div>
@@ -489,7 +62,7 @@
 <!-- ═══════════════════════════════════════════ PREFACE -->
 <div class="chapter">
 <h2 class="chapter-title">A Note Before We Begin</h2>
-<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><button class="listen-btn" data-audio="audio/chapter-01-a-note-before-we-begin.mp3" type="button">🎧 Listen to this section</button><span class="audio-title">Generated Piper narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-01-a-note-before-we-begin.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-01-a-note-before-we-begin.mp3. Run generate_audio.py first.</div></div>
+<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><span class="audio-title">Audio narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-01-a-note-before-we-begin.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-01-a-note-before-we-begin.mp3. Run generate_audio.py first.</div></div>
 <p class="drop-cap">Imagine a library on fire. Not the building — the knowledge. Imagine that every book ever written was going to vanish at midnight, and you had until then to save what mattered most. Not sentiment, not sentimental favorites, not the ones you were supposed to have read in college. What would you carry out?</p>
 <p>That thought experiment produced this book.</p>
 <p>What follows is not a summary. Summaries are like photographs of meals — they tell you what was served but give you nothing to eat. Instead, this is a genuine attempt to synthesize: to find the deepest patterns running through human knowledge, strip away the scaffolding that individual books require for their particular arguments, and present what remains — the raw, essential understanding that a person needs to navigate reality.</p>
@@ -505,7 +78,7 @@
 </div>
 <div class="chapter">
 <h2 class="chapter-title">Chapter 1: The Two Systems Running Your Life</h2>
-<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><button class="listen-btn" data-audio="audio/chapter-02-chapter-1-the-two-systems-running-your-life.mp3" type="button">🎧 Listen to this section</button><span class="audio-title">Generated Piper narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-02-chapter-1-the-two-systems-running-your-life.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-02-chapter-1-the-two-systems-running-your-life.mp3. Run generate_audio.py first.</div></div>
+<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><span class="audio-title">Audio narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-02-chapter-1-the-two-systems-running-your-life.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-02-chapter-1-the-two-systems-running-your-life.mp3. Run generate_audio.py first.</div></div>
 <p class="drop-cap">You have two brains. Not literally — you have one brain — but it runs two very different kinds of software simultaneously, and they are constantly in negotiation with each other about what you should think, feel, and do.</p>
 <p>The first is fast, automatic, and invisible. It runs below the surface like an operating system background process — always on, never announcing itself, making thousands of micro-judgments per second. When you see a face and feel instantly uneasy, when you swerve to avoid a child who stepped into the road before you've consciously registered the danger, when a word just "feels" right in a sentence you're writing — that's System 1. Daniel Kahneman, who spent decades studying these mechanisms, called it thinking fast.</p>
 <p>The second system is slow, deliberate, and exhausting. It's the one you use to calculate a tip, to follow a new recipe, to argue a logical point. It requires effort, burns more energy, and tires quickly. This is System 2. It thinks slow.</p>
@@ -546,7 +119,7 @@
 </div>
 <div class="chapter">
 <h2 class="chapter-title">Chapter 2: The Deep Structure of Everything</h2>
-<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><button class="listen-btn" data-audio="audio/chapter-03-chapter-2-the-deep-structure-of-everything.mp3" type="button">🎧 Listen to this section</button><span class="audio-title">Generated Piper narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-03-chapter-2-the-deep-structure-of-everything.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-03-chapter-2-the-deep-structure-of-everything.mp3. Run generate_audio.py first.</div></div>
+<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><span class="audio-title">Audio narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-03-chapter-2-the-deep-structure-of-everything.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-03-chapter-2-the-deep-structure-of-everything.mp3. Run generate_audio.py first.</div></div>
 <p class="drop-cap">About 13.8 billion years ago — a number so large it is essentially meaningless to the human nervous system — something happened. Physicists call it the Big Bang, though "bang" is misleading: there was no explosion into existing space, because there was no existing space. Space itself expanded. Time itself began.</p>
 <p>Within the first three minutes, hydrogen and helium formed. Within a few hundred million years, gravity — that slight preferential tendency for matter to clump — had gathered these gases into the first stars. And here is the fact that should permanently change how you feel about your own body: stars are the universe's factories. Every element heavier than hydrogen and helium — every carbon atom, every iron atom, every oxygen atom — was forged inside a star and scattered across space when that star died. You are not merely made of star stuff, as Sagan famously said. You are the universe become conscious of itself, assembled from the corpses of stars that burned billions of years before Earth existed.</p>
 <div class="analogy">
@@ -586,7 +159,7 @@
 </div>
 <div class="chapter">
 <h2 class="chapter-title">Chapter 3: The Power of Stories We Tell Together</h2>
-<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><button class="listen-btn" data-audio="audio/chapter-04-chapter-3-the-power-of-stories-we-tell-together.mp3" type="button">🎧 Listen to this section</button><span class="audio-title">Generated Piper narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-04-chapter-3-the-power-of-stories-we-tell-together.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-04-chapter-3-the-power-of-stories-we-tell-together.mp3. Run generate_audio.py first.</div></div>
+<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><span class="audio-title">Audio narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-04-chapter-3-the-power-of-stories-we-tell-together.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-04-chapter-3-the-power-of-stories-we-tell-together.mp3. Run generate_audio.py first.</div></div>
 <p class="drop-cap">Approximately seventy thousand years ago, something changed in the human brain. Archaeologists call it the Cognitive Revolution. What changed, exactly, remains debated — perhaps a mutation in the neural wiring for language — but the effect is visible in the fossil record: suddenly, humans were making art, burying their dead with ceremony, creating tools of remarkable sophistication, and, most importantly, cooperating in large groups with strangers.</p>
 <p>Other animals cooperate, but only with those they know personally and can monitor directly. A chimpanzee troop rarely exceeds 150 individuals, limited by the cognitive load of tracking social relationships. What allowed humans to build groups of thousands, then millions, then billions? Yuval Noah Harari, the historian who most clearly articulated this idea, has a striking answer: fiction.</p>
 <div class="analogy">
@@ -619,7 +192,7 @@
 </div>
 <div class="chapter">
 <h2 class="chapter-title">Chapter 4: The Architecture of Ethics</h2>
-<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><button class="listen-btn" data-audio="audio/chapter-05-chapter-4-the-architecture-of-ethics.mp3" type="button">🎧 Listen to this section</button><span class="audio-title">Generated Piper narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-05-chapter-4-the-architecture-of-ethics.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-05-chapter-4-the-architecture-of-ethics.mp3. Run generate_audio.py first.</div></div>
+<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><span class="audio-title">Audio narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-05-chapter-4-the-architecture-of-ethics.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-05-chapter-4-the-architecture-of-ethics.mp3. Run generate_audio.py first.</div></div>
 <p class="drop-cap">Imagine you are standing at the controls of a runaway trolley. On the track ahead are five people who cannot escape. You can pull a lever to divert the trolley onto a side track, where there is one person who also cannot escape. Do you pull the lever?</p>
 <p>Most people say yes. Pull the lever, save five lives, accept the terrible cost of one. The math seems clear.</p>
 <p>Now imagine that instead of a lever, you are standing on a bridge above the tracks. The only way to stop the trolley is to push a large man standing next to you off the bridge. His body, striking the trolley, will stop it and save the five. The math is identical: one life traded for five. But virtually everyone recoils from pushing the man.</p>
@@ -656,7 +229,7 @@
 </div>
 <div class="chapter">
 <h2 class="chapter-title">Chapter 5: The Invisible Architecture of Power</h2>
-<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><button class="listen-btn" data-audio="audio/chapter-06-chapter-5-the-invisible-architecture-of-power.mp3" type="button">🎧 Listen to this section</button><span class="audio-title">Generated Piper narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-06-chapter-5-the-invisible-architecture-of-power.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-06-chapter-5-the-invisible-architecture-of-power.mp3. Run generate_audio.py first.</div></div>
+<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><span class="audio-title">Audio narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-06-chapter-5-the-invisible-architecture-of-power.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-06-chapter-5-the-invisible-architecture-of-power.mp3. Run generate_audio.py first.</div></div>
 <p class="drop-cap">A fish does not know it is wet. It has no comparison point, no experience of air that would make water feel like something distinct. Most of what shapes your beliefs, your opportunities, your sense of what is natural or possible — operates the same way. It is the water. You don't feel it because you have never been outside of it.</p>
 <p>C. Wright Mills, the sociologist who gave us the phrase "the sociological imagination," argued that the central insight of social science is this: your private troubles are often public issues. The man who can't find a job doesn't have a personal failure — he is experiencing an economic structure. The woman who struggles with depression isn't simply ill — she is living inside a social arrangement that produces depression at predictable rates in predictable people. The individual biography is lived inside a history, and understanding that history changes how we interpret both.</p>
 <h3>Markets, Incentives, and the Invisible Hand</h3>
@@ -692,7 +265,7 @@
 </div>
 <div class="chapter">
 <h2 class="chapter-title">Chapter 6: Intelligence, Artificial and Otherwise</h2>
-<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><button class="listen-btn" data-audio="audio/chapter-07-chapter-6-intelligence-artificial-and-otherwise.mp3" type="button">🎧 Listen to this section</button><span class="audio-title">Generated Piper narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-07-chapter-6-intelligence-artificial-and-otherwise.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-07-chapter-6-intelligence-artificial-and-otherwise.mp3. Run generate_audio.py first.</div></div>
+<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><span class="audio-title">Audio narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-07-chapter-6-intelligence-artificial-and-otherwise.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-07-chapter-6-intelligence-artificial-and-otherwise.mp3. Run generate_audio.py first.</div></div>
 <p class="drop-cap">There is a question sitting at the center of the twenty-first century that none of the previous centuries had to answer: what happens when we build systems that can do our thinking better than we can?</p>
 <p>The story of computing is usually told as a story of tools — machines that extend human capability the way a hammer extends the hand. A calculator computes faster than you can, a search engine retrieves information faster than a library, a navigation app routes more efficiently than any driver. But something has shifted in kind, not just degree. Modern artificial intelligence systems do not simply retrieve — they reason, create, and generalize in ways that their creators did not explicitly program. They learn.</p>
 <div class="analogy">
@@ -724,7 +297,7 @@
 </div>
 <div class="chapter">
 <h2 class="chapter-title">Chapter 7: The Art of a Finite Life</h2>
-<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><button class="listen-btn" data-audio="audio/chapter-08-chapter-7-the-art-of-a-finite-life.mp3" type="button">🎧 Listen to this section</button><span class="audio-title">Generated Piper narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-08-chapter-7-the-art-of-a-finite-life.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-08-chapter-7-the-art-of-a-finite-life.mp3. Run generate_audio.py first.</div></div>
+<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><span class="audio-title">Audio narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-08-chapter-7-the-art-of-a-finite-life.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-08-chapter-7-the-art-of-a-finite-life.mp3. Run generate_audio.py first.</div></div>
 <p class="drop-cap">You have approximately four thousand weeks. This is not a metaphor or an approximation — it is the actual number of weeks in a human lifespan of eighty years. Oliver Burkeman, who wrote an entire book from this single fact, notes that the number's smallness is the point. Four thousand weeks sounds finite in a way that "eighty years" somehow doesn't. It is finite. This is not a problem to be solved. It is the condition under which everything else must be solved.</p>
 <p>The productivity literature — the vast genre of books about time management, habit formation, and peak performance — tends to treat finitude as an obstacle to overcome. If you optimize correctly, you can do it all. Burkeman's more honest view is that you cannot, and attempting to do it all is itself the problem. Every yes is a no to something else. The only question is whether you are choosing your nos consciously or having them chosen for you by default.</p>
 <div class="analogy">
@@ -778,7 +351,7 @@
 </div>
 <div class="chapter">
 <h2 class="chapter-title">What We Do With All of This</h2>
-<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><button class="listen-btn" data-audio="audio/chapter-09-what-we-do-with-all-of-this.mp3" type="button">🎧 Listen to this section</button><span class="audio-title">Generated Piper narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-09-what-we-do-with-all-of-this.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-09-what-we-do-with-all-of-this.mp3. Run generate_audio.py first.</div></div>
+<div class="chapter-rule"></div><div class="audio-panel"><div class="audio-row"><span class="audio-title">Audio narration</span></div><audio class="chapter-audio" controls="" preload="metadata" src="audio/chapter-09-what-we-do-with-all-of-this.mp3"></audio><div class="audio-missing">Audio file missing: audio/chapter-09-what-we-do-with-all-of-this.mp3. Run generate_audio.py first.</div></div>
 <p class="drop-cap">Seventy thousand years ago, a creature indistinguishable from you was drawing pictures in a cave in what is now France, carrying spears across a Eurasian steppe, and beginning to use language in a way that would, in the unfathomable future, produce everything described in this book.</p>
 <p>That creature had the same brain you have. The same emotional architecture, the same cognitive biases, the same capacity for both extraordinary kindness and extraordinary cruelty. What it lacked was accumulated knowledge — the layered understanding of reality that each generation left to the next, slowly building the cathedral of human understanding one stone at a time.</p>
 <p>You have inherited that cathedral. It is imperfect, unfinished, full of beautiful windows and load-bearing errors. Some of what passes for knowledge today will be recognized as superstition by the people who read their version of this book in two hundred years. This is not cause for despair — it is the definition of progress. We do not know what we don't know. The best we can do is maintain the honest curiosity and the institutional structures that allow errors to be corrected.</p>
@@ -803,51 +376,6 @@
 </div>
 </div>
 
-<script>
-  // Static audiobook controls. The MP3s live in /audio and are generated ahead of time with Piper.
-  document.addEventListener('DOMContentLoaded', () => {
-    let currentAudio = null;
-
-    document.querySelectorAll('.listen-btn').forEach((button) => {
-      button.addEventListener('click', () => {
-        const panel = button.closest('.audio-panel');
-        const audio = panel.querySelector('audio');
-
-        if (currentAudio && currentAudio !== audio) {
-          currentAudio.pause();
-        }
-
-        if (audio.paused) {
-          audio.play().catch(() => {
-            const warning = panel.querySelector('.audio-missing');
-            if (warning) warning.style.display = 'block';
-          });
-          button.textContent = '⏸ Pause narration';
-          currentAudio = audio;
-        } else {
-          audio.pause();
-          button.textContent = '🎧 Listen to this section';
-        }
-      });
-    });
-
-    document.querySelectorAll('.chapter-audio').forEach((audio) => {
-      audio.addEventListener('ended', () => {
-        const button = audio.closest('.audio-panel').querySelector('.listen-btn');
-        if (button) button.textContent = '🎧 Listen to this section';
-      });
-      audio.addEventListener('pause', () => {
-        const button = audio.closest('.audio-panel').querySelector('.listen-btn');
-        if (button) button.textContent = '🎧 Listen to this section';
-      });
-      audio.addEventListener('play', () => {
-        if (currentAudio && currentAudio !== audio) currentAudio.pause();
-        currentAudio = audio;
-        const button = audio.closest('.audio-panel').querySelector('.listen-btn');
-        if (button) button.textContent = '⏸ Pause narration';
-      });
-    });
-  });
-</script>
+<script src="audio.js"></script>
 </body>
 </html>
