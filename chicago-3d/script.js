@@ -821,7 +821,7 @@ const initAgent3DLayer = async () => {
     if (agents3D.loading || agents3D.ready) return;
     agents3D.loading = true;
     try {
-        const { createAgent3DLayer } = await import('./agents-3d.js?v=20260627-2');
+        const { createAgent3DLayer } = await import('./agents-3d.js?v=20260627-15');
         agents3D.layer = createAgent3DLayer({
             map,
             getEntities: collect3DEntities,

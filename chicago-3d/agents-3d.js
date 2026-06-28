@@ -1,4 +1,4 @@
-import * as THREE from './vendor/three/three.module.min.js';
+import * as THREE from './vendor/three/three.module.169.min.js';
 
 const MAX_INSTANCES = {
     car: 110,
@@ -9,6 +9,9 @@ const MAX_INSTANCES = {
     metra: 70,
     'metra-locomotive': 12
 };
+const CHICAGO_ORIGIN = [-87.75, 41.88];
+const LONGITUDE_METERS = 111320 * Math.cos(THREE.MathUtils.degToRad(CHICAGO_ORIGIN[1]));
+const LATITUDE_METERS = 110540;
 
 const createLocalMatrix = (position = [0, 0, 0], rotation = [0, 0, 0]) => {
     const quaternion = new THREE.Quaternion().setFromEuler(new THREE.Euler(...rotation));
@@ -37,7 +40,6 @@ const createFleet = (scene) => {
             MAX_INSTANCES[type] * locals.length
         );
         mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-        mesh.frustumCulled = false;
         mesh.count = 0;
         scene.add(mesh);
         fleet[type].push({
@@ -153,8 +155,12 @@ const createFleet = (scene) => {
 export const createAgent3DLayer = ({ map, getEntities, onReady }) => {
     const temporaryMatrix = new THREE.Matrix4();
     const rotationMatrix = new THREE.Matrix4();
-    const scaleMatrix = new THREE.Matrix4();
     const translationMatrix = new THREE.Matrix4();
+    const origin = maplibregl.MercatorCoordinate.fromLngLat(CHICAGO_ORIGIN, 0);
+    const originScale = origin.meterInMercatorCoordinateUnits();
+    const localTransform = new THREE.Matrix4()
+        .makeTranslation(origin.x, origin.y, origin.z)
+        .scale(new THREE.Vector3(originScale, -originScale, originScale));
 
     return {
         id: 'moving-agents-3d',
@@ -179,11 +185,21 @@ export const createAgent3DLayer = ({ map, getEntities, onReady }) => {
             this.renderer.outputColorSpace = THREE.SRGBColorSpace;
             this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
             this.renderer.toneMappingExposure = 1.05;
+            document.documentElement.dataset.agents3d = 'ready';
             onReady?.();
         },
 
         updateInstances() {
-            const entities = getEntities();
+            const bounds = this.map.getBounds();
+            const longitudePadding = Math.max((bounds.getEast() - bounds.getWest()) * 0.2, 0.0015);
+            const latitudePadding = Math.max((bounds.getNorth() - bounds.getSouth()) * 0.2, 0.0015);
+            const entities = getEntities().filter((entity) => {
+                const [lng, lat] = entity.coordinates;
+                return lng >= bounds.getWest() - longitudePadding
+                    && lng <= bounds.getEast() + longitudePadding
+                    && lat >= bounds.getSouth() - latitudePadding
+                    && lat <= bounds.getNorth() + latitudePadding;
+            });
             this.hasEntities = entities.length > 0;
             const grouped = Object.groupBy
                 ? Object.groupBy(entities, (entity) => entity.type)
@@ -191,22 +207,17 @@ export const createAgent3DLayer = ({ map, getEntities, onReady }) => {
                     (result[entity.type] ||= []).push(entity);
                     return result;
                 }, {});
-
             Object.entries(this.fleet).forEach(([type, parts]) => {
                 const entities = (grouped[type] || []).slice(0, MAX_INSTANCES[type]);
                 const worldMatrices = entities.map((entity) => {
-                    const mercator = maplibregl.MercatorCoordinate.fromLngLat(
-                        entity.coordinates,
-                        entity.altitude
-                    );
-                    const scale = mercator.meterInMercatorCoordinateUnits();
-                    translationMatrix.makeTranslation(mercator.x, mercator.y, mercator.z);
-                    scaleMatrix.makeScale(scale, -scale, scale);
+                    const x = (entity.coordinates[0] - CHICAGO_ORIGIN[0]) * LONGITUDE_METERS;
+                    const y = (entity.coordinates[1] - CHICAGO_ORIGIN[1]) * LATITUDE_METERS;
+                    translationMatrix.makeTranslation(x, y, entity.altitude);
                     rotationMatrix.makeRotationZ(THREE.MathUtils.degToRad(-entity.bearing));
-                    return new THREE.Matrix4()
+                    const world = new THREE.Matrix4()
                         .copy(translationMatrix)
-                        .multiply(scaleMatrix)
                         .multiply(rotationMatrix);
+                    return world;
                 });
 
                 parts.forEach((part) => {
@@ -218,17 +229,24 @@ export const createAgent3DLayer = ({ map, getEntities, onReady }) => {
                             instance += 1;
                         });
                     });
+                    const countChanged = part.mesh.count !== instance;
                     part.mesh.count = instance;
                     part.mesh.instanceMatrix.needsUpdate = true;
+                    if (countChanged || (this.frameCount || 0) % 30 === 0) {
+                        part.mesh.computeBoundingSphere();
+                    }
                 });
             });
         },
 
         render(_gl, args) {
             this.updateInstances();
-            this.camera.projectionMatrix.fromArray(args.defaultProjectionData.mainMatrix);
+            this.camera.projectionMatrix
+                .fromArray(args.defaultProjectionData.mainMatrix)
+                .multiply(localTransform);
             this.renderer.resetState();
             this.renderer.render(this.scene, this.camera);
+            this.frameCount = (this.frameCount || 0) + 1;
             if (this.hasEntities) this.map.triggerRepaint();
         },
 
