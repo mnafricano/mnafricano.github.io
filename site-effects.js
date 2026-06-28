@@ -25,6 +25,7 @@
     if (currentPath.includes('/resume/')) return 'resume';
     if (currentPath.includes('/super-book/')) return 'book';
     if (currentPath.includes('/execution-engine/')) return 'engine';
+    if (currentPath.includes('/revenue-auditor/')) return 'auditor';
     return 'home';
   };
 
@@ -39,6 +40,7 @@
     if (section === 'portfolio' && normalizedLabel === 'portfolio') return true;
     if (section === 'book' && href === 'super-book') return true;
     if (section === 'engine' && href === 'execution-engine') return true;
+    if (section === 'auditor' && href === 'revenue-auditor') return true;
     return false;
   };
 
@@ -76,6 +78,15 @@
         { href: '#dashboard', label: 'Dashboard' },
         { href: '#principles', label: 'Principles' },
         { href: pathTo('super-book/'), label: 'Book' }
+      ];
+    }
+
+    if (currentPath.includes('/revenue-auditor/')) {
+      return [
+        { href: pathTo('./'), label: 'Home' },
+        { href: '#how-it-works', label: 'How it works' },
+        { href: '#trust', label: 'Privacy' },
+        { href: pathTo('resume/'), label: 'Resume' }
       ];
     }
 

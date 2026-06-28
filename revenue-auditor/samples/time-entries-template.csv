@@ -1,0 +1,4 @@
+client_name,date,hours,billable,invoiced,invoice_number,description
+Acme Health,2026-06-02,8,yes,yes,AH-1051,Campaign strategy
+Acme Health,2026-06-12,6.5,yes,no,,Launch support
+Cedar & Co.,2026-06-08,7,yes,no,,Product design

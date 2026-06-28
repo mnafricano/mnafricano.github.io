@@ -449,6 +449,17 @@ h2 {
     background-size: 30px 30px, 30px 30px, auto, auto, auto, auto;
 }
 
+.project-revenue::before {
+    background:
+        linear-gradient(90deg, rgba(100, 214, 180, 0.16) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(100, 214, 180, 0.12) 1px, transparent 1px),
+        radial-gradient(circle at 78% 24%, rgba(224, 192, 116, 0.34), transparent 27%),
+        radial-gradient(circle at 26% 72%, rgba(100, 214, 180, 0.3), transparent 28%),
+        linear-gradient(145deg, rgba(15, 45, 37, 0.98), rgba(21, 30, 28, 0.95)),
+        var(--panel-2);
+    background-size: 34px 34px, 34px 34px, auto, auto, auto, auto;
+}
+
 .project-empty {
     background: rgba(255, 255, 255, 0.05);
     border-style: dashed;
