@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Civic Twin is an urban planning simulator that overlays traffic, pedestrian flow, and income data on real city maps.">
+    <meta property="og:title" content="Civic Twin | Urban Planning Simulator">
+    <meta property="og:description" content="A city-scale planning simulator prototype for testing policy, infrastructure, and mobility scenarios over real maps.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mnafricano.github.io/civic-simulator/">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" content="#101214">
+    <title>Civic Twin | Urban Planning Simulator</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../super-book/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../super-book/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../super-book/icons/apple-touch-icon.png">
+    <link rel="stylesheet" href="styles.css?v=20260626-pedestrians-1">
+</head>
+<body>
+    <main class="app-shell">
+        <section class="control-rail" aria-label="Simulation controls">
+            <div class="brand-row">
+                <a class="brand-mark" href="../" aria-label="Marcello Africano home">MA</a>
+                <div>
+                    <p class="eyebrow">Civic simulator</p>
+                    <h1>Civic Twin</h1>
+                </div>
+            </div>
+
+            <div class="scenario-card">
+                <div class="field-group">
+                    <label for="citySelect">City model</label>
+                    <select id="citySelect" data-city-select>
+                        <option value="chicago">Chicago core</option>
+                        <option value="sf">San Francisco bayfront</option>
+                        <option value="nyc">New York midtown</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <label for="scenarioSelect">Planning scenario</label>
+                    <select id="scenarioSelect" data-scenario-select>
+                        <option value="baseline">Baseline weekday</option>
+                        <option value="busPriority">Bus priority lanes</option>
+                        <option value="pedestrianDistrict">Pedestrian district</option>
+                        <option value="equityAccess">Equity access investment</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <span>Simulation clock</span>
+                    <div class="time-control">
+                        <input type="range" min="5" max="23" step="1" value="8" data-hour-slider aria-label="Simulation hour">
+                        <output data-hour-output>8:00 AM</output>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layer-panel" aria-label="Map layers">
+                <div class="panel-title">
+                    <span>Layers</span>
+                    <button type="button" data-toggle-all>Solo pressure</button>
+                </div>
+                <label class="toggle-row">
+                    <input type="checkbox" data-layer="traffic" checked>
+                    <span>Traffic load</span>
+                </label>
+                <label class="toggle-row">
+                    <input type="checkbox" data-layer="pedestrians" checked>
+                    <span>Pedestrian flow</span>
+                </label>
+                <label class="toggle-row">
+                    <input type="checkbox" data-layer="income" checked>
+                    <span>Household income</span>
+                </label>
+                <label class="toggle-row">
+                    <input type="checkbox" data-layer="transit" checked>
+                    <span>Transit access</span>
+                </label>
+            </div>
+
+            <div class="intervention-panel" aria-label="Planning interventions">
+                <div class="panel-title">
+                    <span>Interventions</span>
+                    <button type="button" data-reset-interventions>Reset</button>
+                </div>
+                <label class="slider-row">
+                    <span>Road diet</span>
+                    <input type="range" min="0" max="100" value="20" data-intervention="roadDiet">
+                    <output data-intervention-output="roadDiet">20%</output>
+                </label>
+                <label class="slider-row">
+                    <span>Transit priority</span>
+                    <input type="range" min="0" max="100" value="35" data-intervention="transitBoost">
+                    <output data-intervention-output="transitBoost">35%</output>
+                </label>
+                <label class="slider-row">
+                    <span>Pedestrian safety</span>
+                    <input type="range" min="0" max="100" value="30" data-intervention="safety">
+                    <output data-intervention-output="safety">30%</output>
+                </label>
+                <label class="slider-row">
+                    <span>Equity investment</span>
+                    <input type="range" min="0" max="100" value="25" data-intervention="equityInvestment">
+                    <output data-intervention-output="equityInvestment">25%</output>
+                </label>
+            </div>
+
+            <div class="data-panel" aria-label="Data ingestion readiness">
+                <div class="panel-title">
+                    <span>Data contract</span>
+                    <strong data-import-status>No external feed loaded</strong>
+                </div>
+                <form class="feed-form" data-feed-form>
+                    <label for="feedUrl">Live feed URL</label>
+                    <div class="feed-row">
+                        <input id="feedUrl" name="feedUrl" type="url" placeholder="https://data.city.gov/resource/feed.json" data-feed-url>
+                        <select name="feedType" aria-label="Feed type" data-feed-type>
+                            <option value="auto">Auto</option>
+                            <option value="traffic">Traffic</option>
+                            <option value="income">Income</option>
+                            <option value="pedestrians">Pedestrian</option>
+                            <option value="transit">Transit</option>
+                            <option value="geojson">GeoJSON</option>
+                        </select>
+                    </div>
+                    <button type="submit">Load live feed</button>
+                    <p data-feed-message>Use CSV, JSON, GeoJSON, or Socrata API URLs that allow browser access.</p>
+                </form>
+                <div class="city-feed-panel">
+                    <button type="button" data-load-city-traffic>Load city traffic preset</button>
+                    <button type="button" data-load-city-pedestrians>Load pedestrian count preset</button>
+                    <label class="mini-toggle">
+                        <input type="checkbox" data-auto-refresh-traffic>
+                        <span>Refresh every 60s</span>
+                    </label>
+                    <p data-preset-message>NYC and Chicago use verified public speed feeds. SF needs a city/vendor live-speed connector.</p>
+                    <p data-pedestrian-preset-message>NYC uses DOT pedestrian counts. Chicago and SF need manual or procured counter feeds.</p>
+                </div>
+                <form class="acs-form" data-acs-form>
+                    <label>ACS income loader</label>
+                    <div class="acs-row">
+                        <input name="acsYear" type="number" min="2015" max="2025" value="2023" aria-label="ACS year" data-acs-year>
+                        <input name="acsState" type="text" inputmode="numeric" value="17" aria-label="State FIPS" data-acs-state>
+                        <input name="acsCounty" type="text" inputmode="numeric" value="031" aria-label="County FIPS" data-acs-county>
+                    </div>
+                    <button type="submit">Load ACS income</button>
+                    <p data-acs-message>Loads B19013 median household income by tract. Add tract GeoJSON for exact boundaries.</p>
+                </form>
+                <dl>
+                    <div>
+                        <dt>Map</dt>
+                        <dd>OpenStreetMap raster tiles</dd>
+                    </div>
+                    <div>
+                        <dt>Income</dt>
+                        <dd>ACS rows plus tract GeoJSON with GEOID or tract fields for exact boundaries</dd>
+                    </div>
+                    <div>
+                        <dt>Traffic</dt>
+                        <dd>CSV or GeoJSON with speed, volume, delay, or congestion fields</dd>
+                    </div>
+                    <div>
+                        <dt>Pedestrian</dt>
+                        <dd>CSV or GeoJSON with count, flow, or pedestrian fields</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <div class="metric-stack" aria-label="Scenario metrics">
+                <article>
+                    <span>Network delay</span>
+                    <strong data-delay-metric>0 min</strong>
+                    <small data-delay-delta>Baseline</small>
+                </article>
+                <article>
+                    <span>Pedestrian comfort</span>
+                    <strong data-comfort-metric>0%</strong>
+                    <small data-comfort-delta>Baseline</small>
+                </article>
+                <article>
+                    <span>Equity reach</span>
+                    <strong data-equity-metric>0%</strong>
+                    <small data-equity-delta>Baseline</small>
+                </article>
+                <article>
+                    <span>Implementation score</span>
+                    <strong data-score-metric>0</strong>
+                    <small data-score-delta>Scenario readiness</small>
+                </article>
+            </div>
+        </section>
+
+        <section class="map-workbench" aria-labelledby="map-title">
+            <header class="top-bar">
+                <div>
+                    <p class="eyebrow">Real map overlay</p>
+                    <h2 id="map-title" data-city-title>Chicago core mobility model</h2>
+                </div>
+                <div class="source-status" aria-label="Data source status">
+                    <span data-map-status>OpenStreetMap tiles</span>
+                    <span data-traffic-status>Demo traffic feed</span>
+                    <span data-income-status>ACS-ready income layer</span>
+                </div>
+            </header>
+
+            <div class="map-frame" data-map-frame data-view="diorama">
+                <canvas data-map-canvas width="1600" height="1000" aria-label="Simulated city map with planning overlays"></canvas>
+                <canvas class="diorama-canvas" data-diorama-canvas width="1600" height="1000" aria-label="Tilt-shift city simulation with traffic and pedestrian flow"></canvas>
+                <div class="map-overlay">
+                    <div class="legend">
+                        <span><i class="legend-traffic"></i>Traffic</span>
+                        <span><i class="legend-pedestrian"></i>Pedestrians</span>
+                        <span><i class="legend-income"></i>Income</span>
+                        <span><i class="legend-transit"></i>Transit</span>
+                    </div>
+                    <div class="map-actions">
+                        <div class="view-switch" aria-label="Simulation view">
+                            <button type="button" data-view-mode="diorama" aria-pressed="true">Diorama</button>
+                            <button type="button" data-view-mode="split" aria-pressed="false">Split</button>
+                            <button type="button" data-view-mode="map" aria-pressed="false">Map</button>
+                        </div>
+                        <button type="button" class="play-button" data-play-toggle>Pause</button>
+                    </div>
+                </div>
+            </div>
+
+            <section class="source-panel" aria-labelledby="source-title">
+                <div class="section-minihead">
+                    <div>
+                        <p class="eyebrow">City data stack</p>
+                        <h3 id="source-title">Source presets for procurement demos</h3>
+                    </div>
+                    <button type="button" data-apply-city-stack>Apply city stack</button>
+                </div>
+                <div class="source-grid" data-source-grid></div>
+            </section>
+
+            <section class="report-panel" aria-labelledby="report-title">
+                <div class="section-minihead">
+                    <div>
+                        <p class="eyebrow">Planning report</p>
+                        <h3 id="report-title">Scenario impact brief</h3>
+                    </div>
+                    <button type="button" data-copy-report>Copy brief</button>
+                </div>
+                <div class="report-grid">
+                    <article>
+                        <span>Recommended action</span>
+                        <strong data-recommendation-title>Loading...</strong>
+                        <p data-recommendation-copy></p>
+                    </article>
+                    <article>
+                        <span>Tradeoff</span>
+                        <strong data-tradeoff-title>Loading...</strong>
+                        <p data-tradeoff-copy></p>
+                    </article>
+                    <article>
+                        <span>Procurement next step</span>
+                        <strong data-procurement-title>Loading...</strong>
+                        <p data-procurement-copy></p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="scenario-library" aria-labelledby="library-title">
+                <div class="section-minihead">
+                    <div>
+                        <p class="eyebrow">Project memory</p>
+                        <h3 id="library-title">Saved scenario alternatives</h3>
+                    </div>
+                    <div class="library-actions">
+                        <button type="button" data-save-scenario>Save scenario</button>
+                        <button type="button" data-export-scenario>Export JSON</button>
+                    </div>
+                </div>
+                <div class="scenario-table" data-scenario-library></div>
+            </section>
+
+            <div class="insight-grid">
+                <article class="insight-card">
+                    <span>Priority corridor</span>
+                    <strong data-corridor-insight>Loading...</strong>
+                    <p data-corridor-copy></p>
+                </article>
+                <article class="insight-card">
+                    <span>Equity watch</span>
+                    <strong data-equity-insight>Loading...</strong>
+                    <p data-equity-copy></p>
+                </article>
+                <article class="insight-card import-card">
+                    <span>Production imports</span>
+                    <strong>Connect city feeds</strong>
+                    <p data-import-copy>Import GeoJSON corridors, ACS income tables, GTFS transit stops, and traffic sensor CSV/JSON feeds.</p>
+                    <div class="import-actions">
+                        <label for="dataImport">Import data</label>
+                        <input id="dataImport" type="file" accept=".csv,.json,.geojson" data-data-import>
+                        <button type="button" data-load-sample>Load sample feed</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js?v=20260626-pedestrians-1"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "GEOID": "36061000100", "name": "Sample tract 000100" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-73.9955, 40.766],
+          [-73.986, 40.766],
+          [-73.986, 40.758],
+          [-73.9955, 40.758],
+          [-73.9955, 40.766]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "GEOID": "36061000200", "name": "Sample tract 000200" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-73.986, 40.766],
+          [-73.976, 40.766],
+          [-73.976, 40.758],
+          [-73.986, 40.758],
+          [-73.986, 40.766]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "GEOID": "36061000300", "name": "Sample tract 000300" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-73.9955, 40.758],
+          [-73.986, 40.758],
+          [-73.986, 40.75],
+          [-73.9955, 40.75],
+          [-73.9955, 40.758]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "GEOID": "36061000400", "name": "Sample tract 000400" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-73.986, 40.758],
+          [-73.976, 40.758],
+          [-73.976, 40.75],
+          [-73.986, 40.75],
+          [-73.986, 40.758]
+        ]]
+      }
+    }
+  ]
+}

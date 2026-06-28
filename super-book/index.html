@@ -8,12 +8,20 @@
 <link rel="manifest" href="icons/site.webmanifest">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>The Super Book — A Synthesis of Human Knowledge</title>
+<meta name="description" content="The Super Book is a long-form digital reading system synthesizing essential ideas across science, history, philosophy, society, technology, and life.">
+<meta property="og:title" content="The Super Book | Marcello Africano">
+<meta property="og:description" content="A long-form editorial web book with chapters, audio narration, progress, and reader wayfinding.">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://mnafricano.github.io/super-book/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#2a2420">
+<title>The Super Book | A Synthesis of Human Knowledge</title>
 <link rel="stylesheet" href="styles.css?v=20260622-book-polish">
 </head>
 <body>
+<div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
 <!-- ═══════════════════════════════════════════ COVER -->
-<div class="cover">
+<main class="cover" id="main">
 <span class="book-depth book-depth-one" data-parallax="0.08" aria-hidden="true"></span>
 <span class="book-depth book-depth-two" data-parallax="0.14" aria-hidden="true"></span>
 <div class="cover-mark" data-parallax="0.045" aria-hidden="true"></div>
@@ -22,11 +30,12 @@
 <div class="cover-divider"></div>
 <p class="cover-subtitle">A single volume distilling the essential wisdom of science, history, philosophy, society, technology, and the art of living</p>
 <p class="cover-note">Synthesized from the canon of human thought</p>
-</div>
+</main>
 <!-- ═══════════════════════════════════════════ TOC -->
-<div class="toc-section">
+<nav class="toc-section" id="contents" aria-labelledby="contents-title">
 <div class="toc-inner">
-<div class="toc-label">Contents</div>
+<h2 class="toc-label" id="contents-title">Contents</h2>
+<a class="continue-reading" href="#part1" data-continue-reading>Continue reading</a>
 <a class="toc-entry" href="#part1">
 <span class="toc-num">I</span>
 <span class="toc-part">The Mind — How to Think</span>
@@ -60,7 +69,7 @@
 <span class="toc-part">Coda: The Open Question</span>
 </a>
 </div>
-</div>
+</nav>
 <!-- ═══════════════════════════════════════════ PREFACE -->
 <div class="chapter">
 <h2 class="chapter-title">A Note Before We Begin</h2>

@@ -3,28 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flyout Menu</title>
+  <meta name="description" content="A mini case-study for a CSS flyout menu prototype by Marcello Africano.">
+  <title>Flyout Menu | Marcello Africano Prototype</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../portfolio-shell.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../super-book/icons/favicon-32x32.png">
   <script src="js/prefixfree.min.js" defer></script>
   <script src="../../../site-effects.js?v=20260622-grandiose" defer></script>
   <script src="js/index.js" defer></script>
 </head>
 <body>
-  <div class="testfield">
-    <div class="flyout-wrap">
-      <button class="flyout-btn" type="button" title="Toggle"><span>Flyout Menu Toggle</span></button>
-      <ul class="flyout flyout-init">
-        <li><button type="button"><span>Item</span></button></li>
-        <li><button type="button"><span>Item</span></button></li>
-        <li><button type="button"><span>Item</span></button></li>
-        <li><button type="button"><span>Item</span></button></li>
-        <li><button type="button"><span>Item</span></button></li>
-        <li><button type="button"><span>Item</span></button></li>
-      </ul>
-    </div>
+  <main class="portfolio-shell" id="main">
+    <section class="portfolio-intro" aria-labelledby="demo-title">
+      <div>
+        <p class="portfolio-kicker">Prototype case study</p>
+        <h1 class="portfolio-title" id="demo-title">Flyout Menu</h1>
+        <p class="portfolio-description">A radial expansion study for showing secondary actions from a single compact control.</p>
+      </div>
+      <div class="portfolio-actions">
+        <a class="portfolio-button" href="../../#projects">Back to prototypes</a>
+        <a class="portfolio-button" href="../../../">Home</a>
+      </div>
+    </section>
 
-    <h1>Flyout Menu using CSS by <a href="https://mnafricano.github.io/">Marcello Africano</a></h1>
-  </div>
+    <section class="portfolio-demo-frame" id="demo" aria-label="Flyout menu demo">
+      <div class="testfield">
+        <div class="flyout-wrap">
+          <button class="flyout-btn" type="button" title="Toggle"><span>Flyout Menu Toggle</span></button>
+          <ul class="flyout flyout-init">
+            <li><button type="button"><span>Item</span></button></li>
+            <li><button type="button"><span>Item</span></button></li>
+            <li><button type="button"><span>Item</span></button></li>
+            <li><button type="button"><span>Item</span></button></li>
+            <li><button type="button"><span>Item</span></button></li>
+            <li><button type="button"><span>Item</span></button></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio-notes" aria-labelledby="notes-title">
+      <div>
+        <h2 id="notes-title">Interaction Notes</h2>
+        <p>The demo is intentionally small: one trigger, one burst of choices, and a clear collapse after selection.</p>
+      </div>
+      <ul>
+        <li>Notice the staggered transforms that make the menu feel physical without needing extra assets.</li>
+        <li>The trigger and menu items are real buttons, so the interaction has a keyboard-accessible foundation.</li>
+        <li>The frame keeps the older CSS experiment integrated with the rest of the portfolio.</li>
+      </ul>
+    </section>
+  </main>
 </body>
 </html>

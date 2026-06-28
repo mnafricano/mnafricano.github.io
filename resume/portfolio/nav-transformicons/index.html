@@ -3,41 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Navicon Transformicons</title>
+  <meta name="description" content="A mini case-study for animated navigation transformicons by Marcello Africano.">
+  <title>Navicon Transformicons | Marcello Africano Prototype</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../portfolio-shell.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../super-book/icons/favicon-32x32.png">
   <script src="../../../site-effects.js?v=20260622-grandiose" defer></script>
   <script src="js/index.js" defer></script>
 </head>
 <body>
-  <main class="demo-shell">
-    <section class="device" aria-labelledby="demo-title">
-      <nav class="icon-bar" aria-label="Transformicon examples">
-        <button class="navicon-button larr" type="button" aria-label="Toggle left arrow" aria-pressed="false">
-          <span class="navicon"></span>
-        </button>
-        <button class="navicon-button rarr" type="button" aria-label="Toggle right arrow" aria-pressed="false">
-          <span class="navicon"></span>
-        </button>
-        <button class="navicon-button uarr" type="button" aria-label="Toggle up arrow" aria-pressed="false">
-          <span class="navicon"></span>
-        </button>
-        <button class="navicon-button x" type="button" aria-label="Toggle close icon" aria-pressed="false">
-          <span class="navicon"></span>
-        </button>
-        <button class="navicon-button plus" type="button" aria-label="Toggle plus icon" aria-pressed="false">
-          <span class="navicon"></span>
-        </button>
-        <button class="navicon-button minus" type="button" aria-label="Toggle minus icon" aria-pressed="false">
-          <span class="navicon"></span>
-        </button>
-      </nav>
-
-      <div class="stage">
-        <p class="eyebrow">Transformicons</p>
-        <h1 id="demo-title">Click the icons.</h1>
-        <p class="hint">Each menu button morphs into a different navigation state.</p>
+  <main class="portfolio-shell" id="main">
+    <section class="portfolio-intro" aria-labelledby="demo-title">
+      <div>
+        <p class="portfolio-kicker">Prototype case study</p>
+        <h1 class="portfolio-title" id="demo-title">Navicon Transformicons</h1>
+        <p class="portfolio-description">A button-state study for turning a menu icon into directional, close, plus, and minus commands.</p>
       </div>
+      <div class="portfolio-actions">
+        <a class="portfolio-button" href="../../#projects">Back to prototypes</a>
+        <a class="portfolio-button" href="../../../">Home</a>
+      </div>
+    </section>
+
+    <section class="portfolio-demo-frame" id="demo" aria-label="Navicon transformicon demo">
+      <div class="demo-shell">
+        <section class="device" aria-label="Transformicon examples">
+          <nav class="icon-bar" aria-label="Transformicon buttons">
+            <button class="navicon-button larr" type="button" aria-label="Toggle left arrow" aria-pressed="false">
+              <span class="navicon"></span>
+            </button>
+            <button class="navicon-button rarr" type="button" aria-label="Toggle right arrow" aria-pressed="false">
+              <span class="navicon"></span>
+            </button>
+            <button class="navicon-button uarr" type="button" aria-label="Toggle up arrow" aria-pressed="false">
+              <span class="navicon"></span>
+            </button>
+            <button class="navicon-button x" type="button" aria-label="Toggle close icon" aria-pressed="false">
+              <span class="navicon"></span>
+            </button>
+            <button class="navicon-button plus" type="button" aria-label="Toggle plus icon" aria-pressed="false">
+              <span class="navicon"></span>
+            </button>
+            <button class="navicon-button minus" type="button" aria-label="Toggle minus icon" aria-pressed="false">
+              <span class="navicon"></span>
+            </button>
+          </nav>
+
+          <div class="stage">
+            <p class="eyebrow">Transformicons</p>
+            <h2>Click the icons.</h2>
+            <p class="hint">Each menu button morphs into a different navigation state.</p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="portfolio-notes" aria-labelledby="notes-title">
+      <div>
+        <h2 id="notes-title">Interaction Notes</h2>
+        <p>This is a compact motion system for commands that share the same footprint but communicate different states.</p>
+      </div>
+      <ul>
+        <li>Notice that the layout stays stable while the icon shape changes.</li>
+        <li>The JavaScript only toggles state; the visual behavior lives in CSS.</li>
+        <li>Pressed-state attributes keep the button state available to assistive technology.</li>
+      </ul>
     </section>
   </main>
 </body>

@@ -4,7 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Execution Engine is an ADHD-friendly dashboard for turning knowledge into visible action.">
+    <meta property="og:title" content="Execution Engine | Marcello Africano">
+    <meta property="og:description" content="A small local-first dashboard for capturing avoided tasks, launching a timer, and logging proof of contact.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mnafricano.github.io/execution-engine/">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" content="#101214">
     <title>Execution Engine | Marcello Africano</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../super-book/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../super-book/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../super-book/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="styles.css?v=20260622-dashboard-3">
 </head>
 <body>
@@ -14,7 +23,7 @@
         <span class="rail rail-one" data-parallax="0.18"></span>
     </div>
 
-    <main>
+    <main id="main">
         <section class="dashboard-hero" aria-labelledby="page-title">
             <div class="hero-copy">
                 <p class="eyebrow">Behavior dashboard</p>
@@ -27,6 +36,7 @@
                     <a class="button primary" href="#dashboard">Open dashboard</a>
                     <button class="button secondary" type="button" data-reset-demo>Reset demo data</button>
                 </div>
+                <p class="app-status" role="status" aria-live="polite" data-app-status>Demo data is saved in this browser.</p>
             </div>
 
             <aside class="pulse-console" data-parallax="0.03" aria-label="Execution Engine status">
@@ -70,16 +80,16 @@
                     <form data-capture-form>
                         <label>
                             <span>What are you avoiding?</span>
-                            <textarea name="mission" rows="4" placeholder="Example: I am avoiding opening the tax document because it feels messy."></textarea>
+                            <textarea name="mission" rows="4" required placeholder="Example: I am avoiding opening the tax document because it feels messy."></textarea>
                         </label>
                         <div class="input-row">
                             <label>
                                 <span>Next physical action</span>
-                                <input name="nextAction" type="text" placeholder="Open the folder">
+                                <input name="nextAction" type="text" required placeholder="Open the folder">
                             </label>
                             <label>
                                 <span>Friction to remove</span>
-                                <input name="friction" type="text" placeholder="Clear the desk">
+                                <input name="friction" type="text" required placeholder="Clear the desk">
                             </label>
                         </div>
                         <button class="button primary" type="submit">Add to dashboard</button>
@@ -134,7 +144,7 @@
                     <form class="proof-form" data-proof-form>
                         <label>
                             <span>What proves you made contact?</span>
-                            <input name="proof" type="text" placeholder="Wrote 3 lines, opened the file, sent the email...">
+                            <input name="proof" type="text" required placeholder="Wrote 3 lines, opened the file, sent the email...">
                         </label>
                         <button class="button primary" type="submit">Log proof</button>
                     </form>

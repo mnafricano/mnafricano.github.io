@@ -171,6 +171,15 @@ h1 span {
     margin-top: 38px;
 }
 
+.app-status {
+    max-width: 520px;
+    margin-top: 16px;
+    color: rgba(244, 239, 230, 0.68);
+    font-size: 13px;
+    font-weight: 720;
+    line-height: 1.5;
+}
+
 .button {
     min-height: 48px;
     display: inline-flex;
@@ -194,6 +203,22 @@ h1 span {
 .button.secondary {
     border-color: var(--line);
     background: rgba(255, 255, 255, 0.06);
+}
+
+.button:hover,
+.button:focus-visible,
+.timer-presets button:hover,
+.timer-presets button:focus-visible,
+.icon-button:hover,
+.icon-button:focus-visible {
+    border-color: rgba(72, 182, 166, 0.48);
+    background-color: rgba(255, 255, 255, 0.09);
+}
+
+.button:disabled,
+.icon-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.48;
 }
 
 .pulse-console,
@@ -434,6 +459,19 @@ textarea:focus {
         rgba(255, 255, 255, 0.045);
 }
 
+.mission-card.is-empty,
+.task-list > .empty-state,
+.proof-list > .empty-state {
+    display: grid;
+    place-items: center;
+    min-height: 132px;
+    padding: 18px;
+    border: 1px dashed rgba(244, 239, 230, 0.18);
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
 .mission-card h4,
 .task-item strong {
     margin: 0;
@@ -496,6 +534,11 @@ textarea:focus {
     line-height: 1;
 }
 
+.timer-face.is-running {
+    border-color: rgba(72, 182, 166, 0.42);
+    box-shadow: inset 0 0 0 1px rgba(72, 182, 166, 0.16), 0 20px 50px rgba(72, 182, 166, 0.08);
+}
+
 .timer-presets {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -541,6 +584,12 @@ textarea:focus {
 .task-item {
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
+}
+
+.task-item p,
+.proof-item p,
+.mission-card h4 {
+    overflow-wrap: anywhere;
 }
 
 .task-item.is-active {
@@ -676,6 +725,10 @@ textarea:focus {
         flex-direction: column;
     }
 
+    .hero-actions {
+        max-width: 350px;
+    }
+
     .button,
     .proof-form .button {
         width: 100%;
@@ -709,6 +762,10 @@ textarea:focus {
         grid-template-columns: 1fr;
     }
 
+    .timer-face {
+        min-height: 136px;
+    }
+
     .task-actions {
         justify-content: flex-start;
     }
@@ -726,7 +783,9 @@ textarea:focus {
 
     .orb,
     .rail,
-    .pulse-console {
+    .pulse-console,
+    .launch-meter span {
         transform: none;
+        transition: none;
     }
 }

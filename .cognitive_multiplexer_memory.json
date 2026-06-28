@@ -1,0 +1,14 @@
+[
+  {
+    "id": "08e72d32-ca3e-441b-9a06-907b204d8629",
+    "text": "User asked: Remember that I prefer weekly plans with three priorities.. System answered: Direct answer: Break the request into goal, constraints, options, risks, and next actions. Prefer a clear answer with stated assumptions. Planning frame: define the decision, list constraints, identify reversible tests, set a review date, and choose the next smallest action. Safety frame: check for obvious misuse, harm, or overclaiming.",
+    "type": "episodic",
+    "source": "cognitive_cycle",
+    "timestamp": "2026-06-26T06:04:58.965630Z",
+    "confidence": 0.65,
+    "tags": [
+      "planning",
+      "medium"
+    ]
+  }
+]

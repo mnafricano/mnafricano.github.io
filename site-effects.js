@@ -20,14 +20,33 @@
     return `${'../'.repeat(depth)}${path}`;
   };
 
-  const isCurrent = (path) => {
-    const normalized = path === './' ? '/' : `/${path.replace(/^\.\//, '').replace(/\/$/, '')}/`;
-    return currentPath === normalized || (path === './' && currentPath.endsWith('/mnafricano.github.io/'));
+  const sectionForPath = () => {
+    if (currentPath.includes('/resume/portfolio/')) return 'portfolio';
+    if (currentPath.includes('/resume/')) return 'resume';
+    if (currentPath.includes('/super-book/')) return 'book';
+    if (currentPath.includes('/execution-engine/')) return 'engine';
+    return 'home';
+  };
+
+  const isCurrent = (path, label = '') => {
+    const section = sectionForPath();
+    const href = path.replace(/^\.\//, '').replace(/\/$/, '');
+    const normalizedLabel = label.toLowerCase();
+
+    if (path.startsWith('#')) return false;
+    if (section === 'home' && (path === './' || href === '')) return true;
+    if (section === 'resume' && href === 'resume') return true;
+    if (section === 'portfolio' && normalizedLabel === 'portfolio') return true;
+    if (section === 'book' && href === 'super-book') return true;
+    if (section === 'engine' && href === 'execution-engine') return true;
+    return false;
   };
 
   const pageContext = () => {
     if (currentPath.includes('/resume/portfolio/')) {
       return [
+        { href: pathTo('resume/#projects'), label: 'Portfolio' },
+        { href: '#demo', label: 'Demo' },
         { href: pathTo('resume/'), label: 'Resume' },
         { href: pathTo('./'), label: 'Home' }
       ];
@@ -44,7 +63,8 @@
 
     if (currentPath.includes('/super-book/')) {
       return [
-        { href: '#part1', label: 'Contents' },
+        { href: pathTo('./'), label: 'Home' },
+        { href: '#contents', label: 'Contents' },
         { href: '#coda', label: 'Coda' },
         { href: pathTo('resume/'), label: 'Resume' }
       ];
@@ -52,9 +72,10 @@
 
     if (currentPath.includes('/execution-engine/')) {
       return [
+        { href: pathTo('./'), label: 'Home' },
         { href: '#dashboard', label: 'Dashboard' },
         { href: '#principles', label: 'Principles' },
-        { href: pathTo('./'), label: 'Home' }
+        { href: pathTo('super-book/'), label: 'Book' }
       ];
     }
 
@@ -70,6 +91,13 @@
     if (document.querySelector('.site-shell')) return;
 
     document.body.classList.add('has-site-shell', 'site-booting');
+    const main = document.querySelector('main, .cover');
+    if (main && !main.id) main.id = 'main';
+
+    const skip = document.createElement('a');
+    skip.className = 'skip-link';
+    skip.href = '#main';
+    skip.textContent = 'Skip to main content';
 
     const shell = document.createElement('header');
     shell.className = 'site-shell';
@@ -80,11 +108,12 @@
       </a>
       <nav class="site-shell__nav" aria-label="Persistent site navigation">
         ${pageContext().map((item) => `
-          <a href="${item.href}" ${isCurrent(item.href) ? 'aria-current="page"' : ''}>${item.label}</a>
+          <a href="${item.href}" ${isCurrent(item.href, item.label) ? 'aria-current="page"' : ''}>${item.label}</a>
         `).join('')}
       </nav>
     `;
 
+    document.body.prepend(skip);
     document.body.prepend(shell);
   };
 
@@ -121,6 +150,32 @@
     shellStyle.textContent = `
       @view-transition {
         navigation: auto;
+      }
+
+      :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+        outline: 2px solid rgba(88, 213, 196, 0.92) !important;
+        outline-offset: 4px !important;
+      }
+
+      .skip-link {
+        position: fixed;
+        top: 18px;
+        left: 50%;
+        z-index: 10001;
+        padding: 12px 16px;
+        border-radius: 999px;
+        background: #f5efe7;
+        color: #101214;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 13px;
+        font-weight: 850;
+        text-decoration: none;
+        transform: translate(-50%, -240%);
+        transition: transform 160ms ease;
+      }
+
+      .skip-link:focus-visible {
+        transform: translate(-50%, 0);
       }
 
       body.has-site-shell {
@@ -372,6 +427,10 @@
       }
 
       @media (prefers-reduced-motion: reduce) {
+        @view-transition {
+          navigation: none;
+        }
+
         body.site-booting .site-shell,
         body.site-loaded .site-shell {
           opacity: 1;
@@ -510,6 +569,7 @@
   }, { passive: true });
 
   document.addEventListener('click', (event) => {
+    if (reduceMotion) return;
     const link = event.target.closest('a[href]');
     if (!link || link.target || link.hasAttribute('download')) return;
 

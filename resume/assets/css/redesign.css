@@ -198,7 +198,7 @@ h2 {
 }
 
 h1 {
-    font-size: clamp(56px, 8vw, 108px);
+    font-size: clamp(52px, 7.2vw, 96px);
     line-height: 0.92;
 }
 
@@ -253,7 +253,6 @@ h3 {
 .button:hover,
 .button:focus-visible {
     transform: translateY(-2px);
-    outline: none;
 }
 
 .tactile-card {
@@ -443,7 +442,7 @@ h3 {
 }
 
 .project-card {
-    min-height: 360px;
+    min-height: 460px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -457,7 +456,7 @@ h3 {
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(180deg, transparent 30%, rgba(13, 16, 20, 0.94));
+    background: linear-gradient(180deg, rgba(13, 16, 20, 0.08), rgba(13, 16, 20, 0.96) 48%, rgba(13, 16, 20, 0.98));
     pointer-events: none;
 }
 
@@ -479,7 +478,9 @@ h3 {
 }
 
 .project-card span,
-.project-card strong {
+.project-card strong,
+.project-card p,
+.project-card small {
     position: relative;
     z-index: 2;
 }
@@ -497,6 +498,24 @@ h3 {
     font-family: Georgia, "Times New Roman", serif;
     font-size: 28px;
     line-height: 1.06;
+}
+
+.project-card p {
+    margin-top: 14px;
+    color: rgba(245, 239, 231, 0.78);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.project-card small {
+    display: block;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(245, 239, 231, 0.16);
+    color: rgba(245, 239, 231, 0.62);
+    font-size: 12px;
+    font-weight: 720;
+    line-height: 1.45;
 }
 
 .contact-section {
@@ -626,5 +645,9 @@ h3 {
 
     .project-grid {
         grid-template-columns: 1fr;
+    }
+
+    .project-card {
+        min-height: 420px;
     }
 }

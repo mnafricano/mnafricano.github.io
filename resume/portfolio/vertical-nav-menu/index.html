@@ -3,60 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vertical Navigation Menu</title>
+  <meta name="description" content="A mini case-study for a compact vertical navigation prototype by Marcello Africano.">
+  <title>Vertical Navigation Menu | Marcello Africano Prototype</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../portfolio-shell.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../super-book/icons/favicon-32x32.png">
   <script src="../../../site-effects.js?v=20260622-grandiose" defer></script>
   <script src="js/index.js" defer></script>
 </head>
 <body>
-  <main class="demo-shell">
-    <section class="preview-card" aria-labelledby="demo-title">
-      <p class="eyebrow">Menu component</p>
-      <h1 id="demo-title">Vertical Navigation</h1>
-      <p class="intro">A compact app menu with tactile states, badges, keyboard support, and zero external dependencies.</p>
+  <main class="portfolio-shell" id="main">
+    <section class="portfolio-intro" aria-labelledby="demo-title">
+      <div>
+        <p class="portfolio-kicker">Prototype case study</p>
+        <h1 class="portfolio-title" id="demo-title">Vertical Navigation Menu</h1>
+        <p class="portfolio-description">A compact app menu study focused on scanability, selected state, and small UI feedback.</p>
+      </div>
+      <div class="portfolio-actions">
+        <a class="portfolio-button" href="../../#projects">Back to prototypes</a>
+        <a class="portfolio-button" href="../../../">Home</a>
+      </div>
+    </section>
 
-      <nav class="menu-card" aria-label="Application menu">
-        <a class="menu-item profile" href="#profile" aria-current="false">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M12 12.4a4.4 4.4 0 1 0 0-8.8 4.4 4.4 0 0 0 0 8.8Zm0 2.1c-4 0-7.2 2.1-7.2 4.6v.8h14.4v-.8c0-2.5-3.2-4.6-7.2-4.6Z"/></svg>
-          </span>
-          <span>
-            <strong>Edit Profile</strong>
-            <small>Personal details</small>
-          </span>
-        </a>
+    <section class="portfolio-demo-frame" id="demo" aria-label="Vertical navigation menu demo">
+      <div class="demo-shell">
+        <section class="preview-card" aria-label="Interactive menu component">
+          <p class="eyebrow">Menu component</p>
+          <h2>Vertical Navigation</h2>
+          <p class="intro">A compact app menu with tactile states, badges, keyboard support, and zero external dependencies.</p>
 
-        <a class="menu-item messages is-selected" href="#messages" aria-current="page">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4.5 6.2h15a1.7 1.7 0 0 1 1.7 1.7v8.2a1.7 1.7 0 0 1-1.7 1.7h-15a1.7 1.7 0 0 1-1.7-1.7V7.9a1.7 1.7 0 0 1 1.7-1.7Zm7.5 6.4 6.5-4.4h-13l6.5 4.4Zm0 2.1L4.6 9.8v6h14.8v-6L12 14.7Z"/></svg>
-          </span>
-          <span>
-            <strong>Messages</strong>
-            <small>Inbox and alerts</small>
-          </span>
-          <em>5</em>
-        </a>
+          <nav class="menu-card" aria-label="Application menu">
+            <a class="menu-item profile" href="#profile" aria-current="false">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 12.4a4.4 4.4 0 1 0 0-8.8 4.4 4.4 0 0 0 0 8.8Zm0 2.1c-4 0-7.2 2.1-7.2 4.6v.8h14.4v-.8c0-2.5-3.2-4.6-7.2-4.6Z"/></svg>
+              </span>
+              <span>
+                <strong>Edit Profile</strong>
+                <small>Personal details</small>
+              </span>
+            </a>
 
-        <a class="menu-item settings" href="#settings" aria-current="false">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M13.2 2.8 14 5.2c.5.2.9.4 1.3.7l2.4-.7 1.4 2.5-1.8 1.7c.1.5.1 1 .1 1.5s0 1-.1 1.5l1.8 1.7-1.4 2.5-2.4-.7c-.4.3-.8.5-1.3.7l-.8 2.4h-2.8l-.8-2.4c-.5-.2-.9-.4-1.3-.7l-2.4.7-1.4-2.5 1.8-1.7c-.1-.5-.1-1-.1-1.5s0-1 .1-1.5L4.5 7.7l1.4-2.5 2.4.7c.4-.3.8-.5 1.3-.7l.8-2.4h2.8Zm-1.4 6a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Z"/></svg>
-          </span>
-          <span>
-            <strong>App Settings</strong>
-            <small>Preferences</small>
-          </span>
-        </a>
+            <a class="menu-item messages is-selected" href="#messages" aria-current="page">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4.5 6.2h15a1.7 1.7 0 0 1 1.7 1.7v8.2a1.7 1.7 0 0 1-1.7 1.7h-15a1.7 1.7 0 0 1-1.7-1.7V7.9a1.7 1.7 0 0 1 1.7-1.7Zm7.5 6.4 6.5-4.4h-13l6.5 4.4Zm0 2.1L4.6 9.8v6h14.8v-6L12 14.7Z"/></svg>
+              </span>
+              <span>
+                <strong>Messages</strong>
+                <small>Inbox and alerts</small>
+              </span>
+              <em>5</em>
+            </a>
 
-        <a class="menu-item logout" href="#logout" aria-current="false">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M5 3.7h8.6v2.1H7.1v12.4h6.5v2.1H5V3.7Zm11.1 4 4.4 4.3-4.4 4.3-1.5-1.5 1.8-1.8H10v-2.1h6.4l-1.8-1.8 1.5-1.4Z"/></svg>
-          </span>
-          <span>
-            <strong>Logout</strong>
-            <small>End session</small>
-          </span>
-        </a>
-      </nav>
+            <a class="menu-item settings" href="#settings" aria-current="false">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M13.2 2.8 14 5.2c.5.2.9.4 1.3.7l2.4-.7 1.4 2.5-1.8 1.7c.1.5.1 1 .1 1.5s0 1-.1 1.5l1.8 1.7-1.4 2.5-2.4-.7c-.4.3-.8.5-1.3.7l-.8 2.4h-2.8l-.8-2.4c-.5-.2-.9-.4-1.3-.7l-2.4.7-1.4-2.5 1.8-1.7c-.1-.5-.1-1-.1-1.5s0-1 .1-1.5L4.5 7.7l1.4-2.5 2.4.7c.4-.3.8-.5 1.3-.7l.8-2.4h2.8Zm-1.4 6a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Z"/></svg>
+              </span>
+              <span>
+                <strong>App Settings</strong>
+                <small>Preferences</small>
+              </span>
+            </a>
+
+            <a class="menu-item logout" href="#logout" aria-current="false">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 3.7h8.6v2.1H7.1v12.4h6.5v2.1H5V3.7Zm11.1 4 4.4 4.3-4.4 4.3-1.5-1.5 1.8-1.8H10v-2.1h6.4l-1.8-1.8 1.5-1.4Z"/></svg>
+              </span>
+              <span>
+                <strong>Logout</strong>
+                <small>End session</small>
+              </span>
+            </a>
+          </nav>
+        </section>
+      </div>
+    </section>
+
+    <section class="portfolio-notes" aria-labelledby="notes-title">
+      <div>
+        <h2 id="notes-title">Interaction Notes</h2>
+        <p>This prototype turns a simple navigation list into a readable control surface with enough feedback to feel alive.</p>
+      </div>
+      <ul>
+        <li>Notice the persistent selected row and the unread badge hierarchy.</li>
+        <li>The icons are inline SVGs, so the component can scale without image assets.</li>
+        <li>The menu remains usable with regular link focus and predictable tab order.</li>
+      </ul>
     </section>
   </main>
 </body>

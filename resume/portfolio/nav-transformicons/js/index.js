@@ -1,6 +1,6 @@
 (() => {
   const buttons = document.querySelectorAll('.navicon-button');
-  const title = document.querySelector('h1');
+  const title = document.querySelector('.stage h2');
 
   buttons.forEach((button) => {
     button.addEventListener('click', () => {

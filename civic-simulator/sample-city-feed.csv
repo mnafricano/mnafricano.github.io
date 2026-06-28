@@ -1,0 +1,9 @@
+layer,lat,lng,lat2,lng2,congestion,count,median_income,stop_id
+traffic,41.8844,-87.6472,41.8840,-87.6245,82,,,
+traffic,41.8786,-87.6420,41.8778,-87.6150,74,,,
+pedestrian,41.8839,-87.6326,,,,91,,
+pedestrian,41.8789,-87.6359,,,,68,,
+income,41.8925,-87.6352,,,,,128000,
+income,41.8678,-87.6626,,,,,58000,
+transit,41.8782,-87.6299,,,,,,loop-01
+transit,41.8858,-87.6278,,,,,,river-02

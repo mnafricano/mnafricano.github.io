@@ -211,7 +211,6 @@ h1 {
 .button.primary:hover,
 .button.primary:focus-visible {
     background: #61d1c0;
-    outline: none;
 }
 
 .button.secondary {
@@ -224,7 +223,6 @@ h1 {
 .button.secondary:focus-visible {
     border-color: rgba(244, 239, 230, 0.34);
     background: rgba(255, 255, 255, 0.09);
-    outline: none;
 }
 
 .project-showcase {
@@ -362,13 +360,13 @@ h2 {
 
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 18px;
     margin-top: 26px;
 }
 
 .project-card {
-    min-height: 300px;
+    min-height: 340px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -429,6 +427,28 @@ h2 {
         var(--panel-2);
 }
 
+.project-civic::before {
+    background:
+        linear-gradient(90deg, rgba(118, 169, 216, 0.22) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(118, 169, 216, 0.16) 1px, transparent 1px),
+        radial-gradient(circle at 72% 24%, rgba(226, 118, 104, 0.3), transparent 28%),
+        radial-gradient(circle at 28% 70%, rgba(72, 182, 166, 0.28), transparent 30%),
+        linear-gradient(145deg, rgba(29, 44, 45, 0.98), rgba(25, 28, 31, 0.94)),
+        var(--panel-2);
+    background-size: 38px 38px, 38px 38px, auto, auto, auto, auto;
+}
+
+.project-chicago::before {
+    background:
+        linear-gradient(90deg, rgba(107, 213, 230, 0.22) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(125, 226, 173, 0.16) 1px, transparent 1px),
+        radial-gradient(circle at 76% 22%, rgba(239, 177, 90, 0.34), transparent 26%),
+        radial-gradient(circle at 30% 72%, rgba(107, 213, 230, 0.26), transparent 28%),
+        linear-gradient(145deg, rgba(13, 31, 38, 0.98), rgba(20, 24, 28, 0.94)),
+        var(--panel-2);
+    background-size: 30px 30px, 30px 30px, auto, auto, auto, auto;
+}
+
 .project-empty {
     background: rgba(255, 255, 255, 0.05);
     border-style: dashed;
@@ -462,6 +482,16 @@ h2 {
     line-height: 1.55;
 }
 
+.project-proof {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(244, 239, 230, 0.16);
+    color: rgba(244, 239, 230, 0.66);
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.45;
+}
+
 .project-link {
     margin-top: 24px;
     color: var(--teal);
@@ -484,6 +514,12 @@ h2 {
     }
 }
 
+@media (min-width: 921px) and (max-width: 1180px) {
+    .project-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
@@ -491,7 +527,8 @@ h2 {
 
     .depth-shape,
     .project-showcase,
-    .project-card {
+    .project-card,
+    .project-card::before {
         transform: none;
         transition: none;
     }
@@ -564,5 +601,9 @@ h2 {
     .project-card {
         min-height: 260px;
         padding: 22px;
+    }
+
+    .project-title {
+        margin-top: 44px;
     }
 }

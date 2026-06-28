@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A 3D scale-model viewer of Chicago and the Chicago metro area using live building and map data.">
+    <meta property="og:title" content="Chicago 3D Metro Model">
+    <meta property="og:description" content="Explore Chicago and the metro area as a live 3D scale model with extruded buildings, landmarks, and camera presets.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#091014">
+    <title>Chicago 3D Metro Model</title>
+    <link rel="stylesheet" href="vendor/maplibre/maplibre-gl.css?v=5.24.0">
+    <link rel="stylesheet" href="styles.css?v=20260627-10">
+</head>
+<body>
+    <main class="model-shell" id="main">
+        <div id="map" aria-label="Interactive 3D model of Chicago and the Chicago metro area"></div>
+        <div id="photorealMap" hidden aria-label="Photorealistic 3D view of Chicago"></div>
+
+        <div class="atmosphere" aria-hidden="true"></div>
+
+        <header class="hud hud-top">
+            <a class="brand" href="../" aria-label="Marcello Africano home">
+                <span class="brand-mark">MA</span>
+                <span>Chicago 3D</span>
+            </a>
+            <div class="model-readout" aria-live="polite">
+                <span id="viewName">Downtown core</span>
+                <strong id="scaleLabel">1:1 scale</strong>
+            </div>
+            <div class="city-metrics" aria-label="Simulation metrics">
+                <span id="mobilityMetric"><b>0</b> Moving</span>
+                <span id="trainMetric"><b>0</b> Trains</span>
+                <span><b>$2.4B</b> Value</span>
+                <span><b>9.6M</b> Metro</span>
+                <span class="demand-meter" aria-label="Demand"><i></i><i></i><i></i></span>
+            </div>
+        </header>
+
+        <aside class="hud inspector" id="cityInspector" aria-label="City tools">
+            <div class="inspector-head">
+                <strong id="inspectorTitle">Views</strong>
+                <button class="close-button" type="button" data-action="close-inspector" aria-label="Close panel" title="Close panel">x</button>
+            </div>
+
+            <div class="inspector-panel is-active" data-panel="views">
+                <div class="preset-grid" aria-label="Camera presets">
+                    <button type="button" class="is-active" data-preset="downtown">Downtown</button>
+                    <button type="button" data-preset="lakefront">Lakefront</button>
+                    <button type="button" data-preset="ohare">O'Hare</button>
+                    <button type="button" data-preset="hydepark">Hyde Park</button>
+                    <button type="button" data-preset="evanston">Evanston</button>
+                    <button type="button" data-preset="naperville">Naperville</button>
+                    <button type="button" data-preset="metro">Metro</button>
+                </div>
+            </div>
+
+            <div class="inspector-panel" data-panel="camera">
+                <div class="panel-row">
+                    <button class="icon-button" type="button" data-action="tilt-down" aria-label="Lower camera pitch" title="Lower camera pitch">-</button>
+                    <button class="icon-button" type="button" data-action="reset-north" aria-label="Face north" title="Face north">N</button>
+                    <button class="icon-button" type="button" data-action="tilt-up" aria-label="Raise camera pitch" title="Raise camera pitch">+</button>
+                </div>
+            </div>
+
+            <div class="inspector-panel" data-panel="visuals">
+                <div class="segmented segmented-two" role="group" aria-label="3D renderer">
+                    <button type="button" data-renderer="model" class="is-active">City model</button>
+                    <button type="button" data-renderer="photoreal">Google 3D</button>
+                </div>
+
+                <div class="segmented" role="group" aria-label="Lighting mode">
+                    <button type="button" data-light="dawn">Dawn</button>
+                    <button type="button" data-light="day" class="is-active">Day</button>
+                    <button type="button" data-light="night">Night</button>
+                </div>
+
+                <div class="segmented segmented-two" role="group" aria-label="Ground imagery">
+                    <button type="button" data-imagery="streets">Streets</button>
+                    <button type="button" data-imagery="satellite" class="is-active">Satellite</button>
+                </div>
+
+                <div class="segmented segmented-two" role="group" aria-label="Moving city life">
+                    <button type="button" data-mobility="off">Life off</button>
+                    <button type="button" data-mobility="on" class="is-active">Life on</button>
+                </div>
+
+                <div class="segmented segmented-two" role="group" aria-label="Moving trains">
+                    <button type="button" data-trains="off">Trains off</button>
+                    <button type="button" data-trains="on" class="is-active">Trains on</button>
+                </div>
+
+                <label class="range-control">
+                    <span>Traffic</span>
+                    <input id="trafficDensity" type="range" min="0.35" max="1.8" value="1" step="0.05">
+                    <output id="trafficOutput" for="trafficDensity">100%</output>
+                </label>
+            </div>
+
+            <div class="inspector-panel" data-panel="model">
+                <label class="range-control">
+                    <span>Height</span>
+                    <input id="heightScale" type="range" min="0.65" max="2.4" value="1.15" step="0.05">
+                    <output id="heightOutput" for="heightScale">115%</output>
+                </label>
+            </div>
+
+            <div class="inspector-panel" data-panel="info">
+                <dl class="info-list">
+                    <div><dt>Source</dt><dd>OSM + satellite imagery</dd></div>
+                    <div><dt>Layer</dt><dd>Detailed buildings + city life + trains</dd></div>
+                    <div><dt>Extent</dt><dd>Chicago metro</dd></div>
+                </dl>
+            </div>
+        </aside>
+
+        <nav class="hud city-toolbar" aria-label="City builder toolbar">
+            <button type="button" data-panel-toggle="views" aria-label="District views" title="District views"><span>Views</span></button>
+            <button type="button" data-panel-toggle="camera" aria-label="Camera tools" title="Camera tools"><span>Camera</span></button>
+            <button type="button" data-panel-toggle="visuals" aria-label="Visual layers" title="Visual layers"><span>Layers</span></button>
+            <button type="button" data-panel-toggle="model" aria-label="Model scale" title="Model scale"><span>Scale</span></button>
+            <button type="button" data-panel-toggle="info" aria-label="Model information" title="Model information"><span>Info</span></button>
+        </nav>
+
+        <dialog class="provider-dialog" id="photorealSetup" aria-labelledby="photorealTitle">
+            <form method="dialog">
+                <div class="provider-dialog-head">
+                    <strong id="photorealTitle">Google Photorealistic 3D</strong>
+                    <button class="close-button" value="cancel" aria-label="Cancel photorealistic setup" title="Cancel">x</button>
+                </div>
+                <label class="provider-key">
+                    <span>Maps Tile API key</span>
+                    <input id="googleTilesKey" type="password" autocomplete="off" spellcheck="false">
+                </label>
+                <p id="photorealStatus">Stored only in this browser.</p>
+                <div class="provider-dialog-actions">
+                    <button value="cancel">Cancel</button>
+                    <button class="provider-enable" value="default" data-action="enable-photoreal">Enable</button>
+                </div>
+            </form>
+        </dialog>
+    </main>
+
+    <script src="vendor/maplibre/maplibre-gl.js?v=5.24.0"></script>
+    <script src="script.js?v=20260627-13"></script>
+</body>
+</html>

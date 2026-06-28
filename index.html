@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A personal collection of projects, experiments, writing, and work by Marcello Africano.">
-    <title>Marcello Africano | Projects</title>
+    <meta name="description" content="Marcello Africano's personal portfolio: editorial web experiments, interactive prototypes, long-form writing, and small behavior tools.">
+    <meta property="og:title" content="Marcello Africano | Portfolio and Experiments">
+    <meta property="og:description" content="A tactile, editorial home for Marcello Africano's projects, prototypes, writing, and web interface work.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mnafricano.github.io/">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" content="#101214">
+    <title>Marcello Africano | Portfolio and Experiments</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="super-book/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="super-book/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="super-book/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="styles.css?v=20260622-polish">
 </head>
 <body>
@@ -25,7 +34,7 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main">
         <section class="hero" aria-labelledby="page-title">
             <div class="hero-copy">
                 <p class="eyebrow">Personal workspace</p>
@@ -77,30 +86,53 @@
 
             <div class="project-grid">
                 <a class="project-card project-book" href="super-book" data-parallax="0.018">
-                    <span class="project-kicker">Longform writing</span>
+                    <span class="project-kicker">Editorial system</span>
                     <span class="project-title">The Super Book</span>
                     <span class="project-description">
-                        A synthesized digital book with chapters, audio narration, and a calm editorial reading experience.
+                        A long-form reading system with chapters, audio narration, progress cues, and a calmer rhythm for dense ideas.
                     </span>
-                    <span class="project-link">Open project</span>
+                    <span class="project-proof">Demonstrates editorial typography, reader wayfinding, and accessible media.</span>
+                    <span class="project-link">Read the book</span>
                 </a>
 
                 <a class="project-card project-resume" href="resume" data-parallax="0.026">
-                    <span class="project-kicker">Portfolio</span>
+                    <span class="project-kicker">Case-study hub</span>
                     <span class="project-title">Resume</span>
                     <span class="project-description">
-                        Professional background, selected work, and contact details in one focused place.
+                        A focused portfolio and resume surface that frames older UI prototypes as intentional interaction studies.
                     </span>
-                    <span class="project-link">View resume</span>
+                    <span class="project-proof">Demonstrates responsive layout, project storytelling, and tactile interface polish.</span>
+                    <span class="project-link">Review selected work</span>
                 </a>
 
                 <a class="project-card project-execution" href="execution-engine" data-parallax="0.012">
-                    <span class="project-kicker">Behavior tool</span>
+                    <span class="project-kicker">Interactive tool</span>
                     <span class="project-title">Execution Engine</span>
                     <span class="project-description">
-                        A tactile system for closing the gap between knowing what to do and actually doing it.
+                        A small local-first dashboard for capturing avoided tasks, choosing the next action, and logging proof of contact.
                     </span>
-                    <span class="project-link">Start moving</span>
+                    <span class="project-proof">Demonstrates form states, saved demo data, timer logic, and product-like feedback.</span>
+                    <span class="project-link">Open the dashboard</span>
+                </a>
+
+                <a class="project-card project-civic" href="civic-simulator" data-parallax="0.02">
+                    <span class="project-kicker">Urban planning simulator</span>
+                    <span class="project-title">Civic Twin</span>
+                    <span class="project-description">
+                        A city-scale planning prototype with real map tiles, traffic pressure, pedestrian flow, income overlays, and scenario controls.
+                    </span>
+                    <span class="project-proof">Demonstrates data import hooks, map rendering, and policy-scenario metrics for city sales demos.</span>
+                    <span class="project-link">Open the simulator</span>
+                </a>
+
+                <a class="project-card project-chicago" href="chicago-3d" data-parallax="0.018">
+                    <span class="project-kicker">3D city model</span>
+                    <span class="project-title">Chicago 3D</span>
+                    <span class="project-description">
+                        A live WebGL scale model of Chicago and the metro area with extruded buildings, landmarks, lighting, and camera presets.
+                    </span>
+                    <span class="project-proof">Demonstrates vector-tile rendering, geospatial camera design, and dense urban model controls.</span>
+                    <span class="project-link">Launch the model</span>
                 </a>
             </div>
         </section>

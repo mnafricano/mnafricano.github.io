@@ -54,6 +54,11 @@ const statusTitle = document.querySelector('[data-status-title]');
 const openCount = document.querySelector('[data-open-count]');
 const proofCount = document.querySelector('[data-proof-count]');
 const meterFill = document.querySelector('[data-meter-fill]');
+const appStatus = document.querySelector('[data-app-status]');
+
+function announce(message) {
+    appStatus.textContent = message;
+}
 
 function loadState() {
     try {
@@ -111,12 +116,14 @@ function renderActive() {
     state.activeId = task?.id || null;
 
     if (!task) {
+        activeCard.classList.add('is-empty');
         activeCard.innerHTML = '<p class="empty-state">Add a loop or choose one from the queue.</p>';
         cutButton.disabled = true;
         completeButton.disabled = true;
         return;
     }
 
+    activeCard.classList.remove('is-empty');
     cutButton.disabled = false;
     completeButton.disabled = false;
     activeCard.innerHTML = `
@@ -172,8 +179,10 @@ function renderProofs() {
 
 function renderTimer() {
     timerDisplay.textContent = formatTime(state.timerRemaining);
+    timerDisplay.classList.toggle('is-running', state.timerRunning);
     presetButtons.forEach((button) => {
         button.classList.toggle('is-active', Number(button.dataset.minutes) === state.selectedMinutes);
+        button.setAttribute('aria-pressed', Number(button.dataset.minutes) === state.selectedMinutes ? 'true' : 'false');
     });
 }
 
@@ -232,7 +241,10 @@ captureForm.addEventListener('submit', (event) => {
     const nextAction = data.get('nextAction').trim();
     const friction = data.get('friction').trim();
 
-    if (!mission || !nextAction || !friction) return;
+    if (!mission || !nextAction || !friction) {
+        announce('Add the avoided thing, the next physical action, and the friction to remove.');
+        return;
+    }
 
     const task = {
         id: uid('task'),
@@ -247,14 +259,20 @@ captureForm.addEventListener('submit', (event) => {
     state.tasks.unshift(task);
     state.activeId = task.id;
     captureForm.reset();
+    announce('Loop added and made active. Saved in this browser.');
     render();
 });
 
 proofForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const input = proofForm.elements.proof;
+    if (!input.value.trim()) {
+        announce('Name one visible proof before logging it.');
+        return;
+    }
     addProof(input.value);
     input.value = '';
+    announce('Proof logged. The dashboard has been saved.');
 });
 
 taskList.addEventListener('click', (event) => {
@@ -263,11 +281,13 @@ taskList.addEventListener('click', (event) => {
 
     if (select) {
         setActive(select.dataset.selectTask);
+        announce('Active mission updated.');
     }
 
     if (remove) {
         state.tasks = state.tasks.filter((task) => task.id !== remove.dataset.deleteTask);
         if (state.activeId === remove.dataset.deleteTask) state.activeId = activeTask()?.id || null;
+        announce('Task removed from the queue.');
         render();
     }
 });
@@ -277,6 +297,7 @@ cutButton.addEventListener('click', () => {
     if (!task) return;
     task.frictionRemoved = true;
     addProof(`Removed friction: ${task.friction}`);
+    announce('Friction marked as removed and logged as proof.');
     render();
 });
 
@@ -286,6 +307,7 @@ completeButton.addEventListener('click', () => {
     task.complete = true;
     addProof(`Completed: ${task.nextAction}`);
     state.activeId = activeTask()?.id || null;
+    announce('Mission completed and logged as proof.');
     render();
 });
 
@@ -294,6 +316,7 @@ presetButtons.forEach((button) => {
         stopTimer();
         state.selectedMinutes = Number(button.dataset.minutes);
         state.timerRemaining = state.selectedMinutes * 60;
+        announce(`${state.selectedMinutes}-minute launch window selected.`);
         render();
     });
 });
@@ -301,6 +324,7 @@ presetButtons.forEach((button) => {
 startButton.addEventListener('click', () => {
     if (timerId) return;
     state.timerRunning = true;
+    announce(`${state.selectedMinutes}-minute launch started.`);
     renderStatus();
 
     timerId = window.setInterval(() => {
@@ -318,12 +342,14 @@ startButton.addEventListener('click', () => {
 
 pauseButton.addEventListener('click', () => {
     stopTimer();
+    announce('Timer paused. Progress saved.');
     render();
 });
 
 resetButton.addEventListener('click', () => {
     stopTimer();
     state.timerRemaining = state.selectedMinutes * 60;
+    announce('Timer reset.');
     render();
 });
 
@@ -331,6 +357,7 @@ resetDemoButton.addEventListener('click', () => {
     stopTimer();
     localStorage.removeItem(storageKey);
     state = structuredClone(seedState);
+    announce('Demo data reset.');
     render();
 });
 
