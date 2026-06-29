@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Find unbilled work, underbilling, overdue invoices, and renewal risk without uploading private business data.">
+  <meta name="theme-color" content="#10231f">
+  <title>Revenue Leak Auditor — Find the money you already earned</title>
+  <link rel="icon" href="../super-book/icons/favicon-32x32.png">
+  <link rel="stylesheet" href="styles.css?v=1">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Revenue Leak Auditor home">
+      <span class="brand-mark" aria-hidden="true">R</span>
+      <span>Revenue Leak Auditor</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#how-it-works">How it works</a>
+      <a href="#trust">Privacy</a>
+      <button class="button button-small button-quiet" type="button" data-action="open-audits">My audits</button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" data-landing>
+      <div class="hero-copy">
+        <p class="eyebrow">Private by design · Free to use</p>
+        <h1>Find the money you already earned.</h1>
+        <p class="hero-lede">Cross-check contracts, invoices, payments, and time entries for revenue leaks—without uploading a single record.</p>
+        <div class="hero-actions">
+          <button class="button button-primary" type="button" data-action="demo">Run the demo audit</button>
+          <button class="button button-secondary" type="button" data-action="new">Start a private audit</button>
+        </div>
+        <p class="microcopy">No account. No server. Your data stays in this browser.</p>
+      </div>
+      <div class="signal-card" aria-label="Example audit summary">
+        <div class="signal-head">
+          <span>Audit signal</span>
+          <span class="live-dot">Local only</span>
+        </div>
+        <strong>$18,725</strong>
+        <p>potential revenue found</p>
+        <div class="signal-bars" aria-hidden="true">
+          <span style="--w: 88%"></span>
+          <span style="--w: 64%"></span>
+          <span style="--w: 42%"></span>
+        </div>
+        <div class="signal-row"><span>Unbilled work</span><b>$9,600</b></div>
+        <div class="signal-row"><span>Overdue</span><b>$5,700</b></div>
+        <div class="signal-row"><span>Pricing drift</span><b>$3,425</b></div>
+      </div>
+    </section>
+
+    <section class="proof-strip" data-landing aria-label="Product guarantees">
+      <span>100% browser-side</span>
+      <span>Explainable calculations</span>
+      <span>CSV + text PDF support</span>
+      <span>Printable evidence trail</span>
+    </section>
+
+    <section class="section" id="how-it-works" data-landing>
+      <div class="section-heading">
+        <p class="eyebrow">A short path to answers</p>
+        <h2>From messy records to a ranked action list.</h2>
+      </div>
+      <div class="steps">
+        <article><span>01</span><h3>Bring the records</h3><p>Import invoice, payment, and time CSVs. Add text-based contracts as PDFs.</p></article>
+        <article><span>02</span><h3>Confirm the facts</h3><p>Map columns and approve detected contract terms. The auditor never guesses silently.</p></article>
+        <article><span>03</span><h3>Recover the value</h3><p>Review calculations, supporting evidence, and the next best action for each finding.</p></article>
+      </div>
+    </section>
+
+    <section class="section trust-section" id="trust" data-landing>
+      <div>
+        <p class="eyebrow">A vault without a server</p>
+        <h2>Your financial records never leave your device.</h2>
+      </div>
+      <div class="trust-copy">
+        <p>Audits are stored in this browser using IndexedDB. There are no accounts, analytics, tracking pixels, databases, or API calls containing your records.</p>
+        <p>Clear one audit or erase everything whenever you want. Exported files are created locally.</p>
+        <a href="#methodology">Read methodology and limitations</a>
+      </div>
+    </section>
+
+    <section class="workspace" data-workspace hidden aria-labelledby="workspace-title">
+      <header class="workspace-header">
+        <div>
+          <button class="back-link" type="button" data-action="home">← Product home</button>
+          <p class="eyebrow">Local audit workspace</p>
+          <h1 id="workspace-title" data-audit-name>Revenue audit</h1>
+          <p class="save-state" data-save-state>Stored only in this browser</p>
+        </div>
+        <div class="workspace-actions">
+          <button class="button button-secondary" type="button" data-action="print">Print report</button>
+          <button class="button button-primary" type="button" data-action="export">Export CSV</button>
+        </div>
+      </header>
+
+      <nav class="workflow" aria-label="Audit workflow">
+        <button type="button" data-view-target="import"><span>1</span> Import</button>
+        <button type="button" data-view-target="terms"><span>2</span> Confirm terms <b data-term-count></b></button>
+        <button type="button" data-view-target="findings"><span>3</span> Findings <b data-finding-count></b></button>
+      </nav>
+
+      <section class="view" data-view="import" aria-labelledby="import-title">
+        <div class="view-heading">
+          <div><p class="eyebrow">Step one</p><h2 id="import-title">Bring the source records.</h2></div>
+          <p>Imports are parsed locally. Start with any file; add the others when ready.</p>
+        </div>
+        <div class="import-grid">
+          <article class="import-card">
+            <span class="file-icon" aria-hidden="true">CSV</span>
+            <h3>Invoices</h3>
+            <p>Amounts, dates, billed hours, rates, and status.</p>
+            <label class="button button-secondary file-button">Choose CSV<input type="file" accept=".csv,text/csv" data-csv-input="invoices"></label>
+            <a href="samples/invoices-template.csv" download>Download template</a>
+            <small data-record-count="invoices">0 records</small>
+          </article>
+          <article class="import-card">
+            <span class="file-icon" aria-hidden="true">CSV</span>
+            <h3>Payments</h3>
+            <p>Payment amounts matched by client and invoice number.</p>
+            <label class="button button-secondary file-button">Choose CSV<input type="file" accept=".csv,text/csv" data-csv-input="payments"></label>
+            <a href="samples/payments-template.csv" download>Download template</a>
+            <small data-record-count="payments">0 records</small>
+          </article>
+          <article class="import-card">
+            <span class="file-icon" aria-hidden="true">CSV</span>
+            <h3>Time entries</h3>
+            <p>Billable hours, invoice links, dates, and descriptions.</p>
+            <label class="button button-secondary file-button">Choose CSV<input type="file" accept=".csv,text/csv" data-csv-input="timeEntries"></label>
+            <a href="samples/time-entries-template.csv" download>Download template</a>
+            <small data-record-count="timeEntries">0 records</small>
+          </article>
+          <article class="import-card contract-card">
+            <span class="file-icon" aria-hidden="true">PDF</span>
+            <h3>Contracts</h3>
+            <p>Text-based PDFs only. Scanned or image-only PDFs are not supported in this MVP.</p>
+            <label class="button button-secondary file-button">Choose PDF<input type="file" accept=".pdf,application/pdf" data-pdf-input></label>
+            <small data-record-count="contracts">0 confirmed contracts</small>
+          </article>
+        </div>
+        <div class="next-row">
+          <p><strong data-import-total>0</strong> source records are ready for analysis.</p>
+          <button class="button button-primary" type="button" data-view-target="terms">Review contract terms →</button>
+        </div>
+      </section>
+
+      <section class="view" data-view="terms" hidden aria-labelledby="terms-title">
+        <div class="view-heading">
+          <div><p class="eyebrow">Step two</p><h2 id="terms-title">Confirm the contract facts.</h2></div>
+          <p>Detected values are candidates, not facts. Review every field before confirming it.</p>
+        </div>
+        <div data-contract-list></div>
+        <div class="empty-panel" data-contract-empty>
+          <h3>No contracts yet</h3>
+          <p>Import a text-based PDF or add terms manually. Analysis can still identify overdue invoices without a contract.</p>
+          <button class="button button-secondary" type="button" data-action="manual-contract">Add terms manually</button>
+        </div>
+        <div class="next-row">
+          <button class="button button-secondary" type="button" data-action="manual-contract">+ Add another contract</button>
+          <button class="button button-primary" type="button" data-action="analyze">Analyze revenue →</button>
+        </div>
+      </section>
+
+      <section class="view report-view" data-view="findings" hidden aria-labelledby="findings-title">
+        <div class="report-heading">
+          <div><p class="eyebrow">Decision-support report</p><h2 id="findings-title">Revenue at a glance.</h2></div>
+          <p>Estimates are based only on imported records and confirmed terms. They are not accounting or legal advice.</p>
+        </div>
+        <div class="metrics">
+          <article><span>Potentially recoverable</span><strong data-metric="recoverable">$0</strong><small>Unbilled, underbilled, retainers, increases</small></article>
+          <article><span>Overdue revenue</span><strong data-metric="overdue">$0</strong><small>Outstanding past due date</small></article>
+          <article><span>Renewal & scope risk</span><strong data-metric="renewalRisk">$0</strong><small>At-risk contract value</small></article>
+          <article><span>Critical / high</span><strong data-metric="priority">0</strong><small data-severity-summary>0 critical · 0 high · 0 medium</small></article>
+        </div>
+
+        <div class="report-layout">
+          <aside class="filters" aria-label="Filter findings">
+            <h3>Filter findings</h3>
+            <label>Client<select data-filter="client"><option value="">All clients</option></select></label>
+            <label>Category<select data-filter="category"><option value="">All categories</option></select></label>
+            <label>Severity<select data-filter="severity"><option value="">All severities</option><option>critical</option><option>high</option><option>medium</option></select></label>
+            <label>Confidence<select data-filter="confidence"><option value="">All confidence</option><option>high</option><option>medium</option><option>incomplete</option></select></label>
+            <label>Sort<select data-filter="sort"><option value="amount">Highest amount</option><option value="severity">Highest severity</option><option value="client">Client name</option></select></label>
+            <button class="text-button" type="button" data-action="reset-filters">Reset filters</button>
+          </aside>
+          <div>
+            <article class="client-summary" data-client-summary hidden></article>
+            <div class="findings-toolbar">
+              <p><strong data-visible-count>0</strong> findings</p>
+              <div class="severity-key"><span class="dot critical"></span> Critical <span class="dot high"></span> High <span class="dot medium"></span> Medium</div>
+            </div>
+            <div class="findings-list" data-findings-list></div>
+            <div class="empty-panel" data-findings-empty hidden><h3>No matching findings</h3><p>Adjust the filters or import more records.</p></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="section methodology" id="methodology" data-landing>
+      <div class="section-heading"><p class="eyebrow">Methodology & limitations</p><h2>Transparent rules, cautious estimates.</h2></div>
+      <details><summary>How are findings calculated?</summary><p>The auditor uses deterministic comparisons: time without invoice references, invoice values versus confirmed rates, outstanding balances after matched payments, retainers versus current billing, anniversary pricing, contract dates, and monthly hours versus included scope. Every finding exposes its arithmetic and evidence.</p></details>
+      <details><summary>What can it not determine?</summary><p>It cannot interpret side letters, credits, verbal agreements, tax treatment, or accounting policy. Image-only PDFs need OCR and are not supported. Currency conversion is not performed; use one currency per audit. Review every result against your source systems.</p></details>
+      <details><summary>Where is my data stored?</summary><p>Only in IndexedDB in this browser profile. Clearing site data can erase it. Export reports you need to retain. No analytics or user-data network requests are made.</p></details>
+    </section>
+  </main>
+
+  <dialog data-dialog="new">
+    <form method="dialog" data-new-form>
+      <button class="dialog-close" type="button" data-action="close-dialog" aria-label="Close">×</button>
+      <p class="eyebrow">New local audit</p>
+      <h2>Name this audit</h2>
+      <label>Audit name<input name="name" required maxlength="80" placeholder="e.g. Q2 client revenue review"></label>
+      <label>Audit currency
+        <select name="currency">
+          <option value="USD">USD — US dollar</option>
+          <option value="EUR">EUR — euro</option>
+          <option value="GBP">GBP — pound sterling</option>
+          <option value="CAD">CAD — Canadian dollar</option>
+          <option value="AUD">AUD — Australian dollar</option>
+        </select>
+      </label>
+      <p class="form-note">This creates a private workspace stored only in this browser.</p>
+      <button class="button button-primary" value="default" type="submit">Create audit</button>
+    </form>
+  </dialog>
+
+  <dialog data-dialog="audits">
+    <div class="dialog-body">
+      <button class="dialog-close" type="button" data-action="close-dialog" aria-label="Close">×</button>
+      <p class="eyebrow">Stored on this device</p>
+      <h2>My audits</h2>
+      <div class="audit-list" data-audit-list></div>
+      <button class="button button-danger" type="button" data-action="clear-all">Permanently erase all local audits</button>
+    </div>
+  </dialog>
+
+  <dialog data-dialog="mapping" class="wide-dialog">
+    <form method="dialog" data-mapping-form>
+      <button class="dialog-close" type="button" data-action="close-dialog" aria-label="Close">×</button>
+      <p class="eyebrow">Map CSV columns</p>
+      <h2 data-mapping-title>Map fields</h2>
+      <p data-mapping-note></p>
+      <div class="mapping-grid" data-mapping-fields></div>
+      <div class="table-wrap"><table><thead data-preview-head></thead><tbody data-preview-body></tbody></table></div>
+      <div class="dialog-actions"><button class="button button-secondary" type="button" data-action="close-dialog">Cancel</button><button class="button button-primary" type="submit" value="default">Import records</button></div>
+    </form>
+  </dialog>
+
+  <dialog data-dialog="contract" class="wide-dialog">
+    <form method="dialog" data-contract-form>
+      <button class="dialog-close" type="button" data-action="close-dialog" aria-label="Close">×</button>
+      <p class="eyebrow">Human confirmation required</p>
+      <h2>Review contract terms</h2>
+      <p data-contract-source>Enter only terms you can verify in the source contract.</p>
+      <input type="hidden" name="id">
+      <input type="hidden" name="sourceName">
+      <div class="form-grid">
+        <label class="span-2">Client name <span>*</span><input name="clientName" required maxlength="100"></label>
+        <label>Hourly rate <input name="hourlyRate" inputmode="decimal" type="number" min="0" step="0.01" placeholder="200.00"></label>
+        <label>Monthly retainer <input name="retainerAmount" inputmode="decimal" type="number" min="0" step="0.01"></label>
+        <label>Included hours / month <input name="includedHours" inputmode="decimal" type="number" min="0" step="0.1"></label>
+        <label>Payment terms (days) <input name="paymentTermsDays" inputmode="numeric" type="number" min="0" max="365"></label>
+        <label>Annual increase (%) <input name="annualIncreasePercent" inputmode="decimal" type="number" min="0" max="100" step="0.1"></label>
+        <label>Start date <input name="startDate" type="date"></label>
+        <label>Renewal / end date <input name="endDate" type="date"></label>
+      </div>
+      <label class="confirm-check"><input type="checkbox" name="confirmed" required> I reviewed these values against the source and confirm they are suitable for this audit.</label>
+      <div class="dialog-actions"><button class="button button-secondary" type="button" data-action="close-dialog">Cancel</button><button class="button button-primary" type="submit" value="default">Confirm terms</button></div>
+    </form>
+  </dialog>
+
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+  <footer>
+    <p>Revenue Leak Auditor · Local-first decision support</p>
+    <a href="../">A project by Marcello Africano</a>
+  </footer>
+  <script type="module" src="app.js?v=1"></script>
+</body>
+</html>
