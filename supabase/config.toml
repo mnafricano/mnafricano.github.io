@@ -1,0 +1,88 @@
+project_id = "revenue-leak-auditor"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "storage", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+major_version = 15
+
+[studio]
+enabled = true
+port = 54323
+
+[auth]
+enabled = true
+site_url = "http://localhost:5173/revenue-auditor/"
+additional_redirect_urls = [
+  "http://localhost:5173/revenue-auditor/**",
+  "https://mnafricano.github.io/revenue-auditor/**"
+]
+jwt_expiry = 3600
+enable_signup = true
+
+[auth.email]
+enable_signup = false
+double_confirm_changes = true
+enable_confirmations = true
+
+[auth.mfa.totp]
+enroll_enabled = true
+verify_enabled = true
+
+[auth.captcha]
+enabled = true
+provider = "turnstile"
+secret = "env(SUPABASE_AUTH_CAPTCHA_SECRET)"
+
+[auth.rate_limit]
+email_sent = 10
+sms_sent = 30
+anonymous_users = 30
+token_refresh = 150
+sign_in_sign_ups = 30
+token_verifications = 30
+
+[storage]
+enabled = true
+file_size_limit = "15MiB"
+
+[functions.run-audit]
+verify_jwt = true
+
+[functions.oauth-start]
+verify_jwt = true
+
+[functions.oauth-callback]
+verify_jwt = false
+
+[functions.sync-source]
+verify_jwt = true
+
+[functions.billing-checkout]
+verify_jwt = true
+
+[functions.billing-portal]
+verify_jwt = true
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.workspace-invite]
+verify_jwt = true
+
+[functions.migrate-legacy-audit]
+verify_jwt = true
+
+[functions.account-lifecycle]
+verify_jwt = true
+
+[functions.platform-admin]
+verify_jwt = true
+
+[functions.scheduled-maintenance]
+verify_jwt = false

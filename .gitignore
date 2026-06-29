@@ -4,3 +4,13 @@
 *.egg-info/
 __pycache__/
 *.pyc
+node_modules/
+apps/revenue-auditor/test-results/
+apps/revenue-auditor/playwright-report/
+apps/revenue-auditor/coverage/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+supabase/.branches/
+supabase/.temp/

@@ -1,0 +1,11 @@
+{
+  "name": "mnafricano-github-io",
+  "private": true,
+  "packageManager": "pnpm@11.7.0",
+  "scripts": {
+    "auditor:dev": "pnpm --dir apps/revenue-auditor dev",
+    "auditor:build": "pnpm --dir apps/revenue-auditor build",
+    "auditor:test": "pnpm --dir apps/revenue-auditor test",
+    "auditor:check": "pnpm --dir apps/revenue-auditor check"
+  }
+}

@@ -2,61 +2,79 @@
 
 ## Revenue Leak Auditor
 
-`revenue-auditor/` is a zero-cost, local-first audit tool for service businesses. It compares contract terms, invoices, payments, and time entries to surface unbilled work, underbilling, overdue balances, retainer gaps, missed price increases, approaching renewals, and scope creep.
+Revenue Leak Auditor is a multi-tenant SaaS for service businesses. It compares contracts, invoices, payments, and time entries to surface explainable unbilled work, underbilling, overdue balances, retainer gaps, missed increases, renewal risk, and scope creep.
+
+The production frontend lives in `apps/revenue-auditor/`, Supabase migrations and Edge Functions live in `supabase/`, and Vite emits the checked deployment artifact to `revenue-auditor/` for the existing GitHub Pages URL.
 
 ### Run locally
 
-The portfolio and auditor are static files. Serve the repository root so ES modules and IndexedDB use a normal web origin:
+Prerequisites: Node 22, pnpm, Docker, and the Supabase CLI.
 
 ```bash
-python3 -m http.server 8000
+pnpm install
+cp apps/revenue-auditor/.env.example apps/revenue-auditor/.env.local
+cp supabase/.env.example supabase/.env
+supabase start
+supabase db reset
+pnpm auditor:dev
 ```
 
-Then open `http://localhost:8000/revenue-auditor/`. Opening the HTML directly with `file://` is not supported.
+Open `http://localhost:5173/revenue-auditor/`. Without Supabase environment values the frontend intentionally enters launch-preview mode: the full Team demo works, while account and provider mutations remain disabled.
 
 ### Test
 
-The auditor core uses Node's built-in test runner and has no package installation step:
-
 ```bash
-node --test revenue-auditor/tests/core.test.mjs
+pnpm auditor:check
+supabase test db
+deno test --allow-env supabase/functions/tests
+pnpm --dir apps/revenue-auditor test:e2e
 ```
 
-The existing Python project remains testable with:
+The existing Python project is still tested independently:
 
 ```bash
 pytest
 ```
 
-### Deploy
+### Architecture
 
-The repository remains compatible with GitHub Pages' branch-based static publishing. Commit and push the files; no build command, paid hosting, server, account system, API key, or environment secret is required. Relative URLs make the auditor work at `/revenue-auditor/` under the existing Pages site.
+- React, TypeScript, and Vite provide separate static entrypoints for marketing, authentication, workspace, account, admin, and legal surfaces.
+- Supabase Auth provides password, Google OAuth, PKCE sessions, password recovery, and TOTP MFA.
+- Postgres stores workspace-scoped normalized records. Row-level policies are applied to every customer table; entitlements are also enforced with database triggers.
+- Private Supabase Storage holds contracts under `workspace/audit/object` paths with membership and quota policies.
+- The shared deterministic engine runs in a Supabase Edge Function and creates immutable versioned `audit_runs` plus findings.
+- Stripe Billing Checkout/Portal is isolated from customer-authorized Stripe Connect OAuth.
+- QuickBooks and Stripe imports normalize provider records, use encrypted server-only refresh tokens, support incremental sync, and expose retryable error states without deleting prior data.
+- IndexedDB v1 audits are detected after sign-in and copied only after explicit confirmation.
 
-### Architecture and privacy
+### Plans and operational limits
 
-- `core.js` contains CSV parsing, validation, contract-candidate extraction, deterministic detection rules, and summaries.
-- `storage.js` owns versioned IndexedDB persistence. Audit records use `schemaVersion: 1`; future versions migrate through `migrateAudit`.
-- `app.js` controls imports, explicit contract confirmation, reporting, filters, deletion, and local exports.
-- Imported records, extracted contract text, and findings remain in the browser. There is no analytics or backend request.
-- PDF.js is loaded as executable code from a pinned public CDN when—and only when—the user selects a PDF. The PDF bytes are passed to that library inside the browser and are never uploaded. All CSV processing and the full demo work without that optional download.
-- Clearing browser/site data deletes saved audits. Users should export reports they need to retain.
+- Free: one personal seat, three clients, one active audit, 50 MB, manual imports.
+- Solo: $39/month or $390/year, 25 clients/audits, 1 GB, connected data and weekly audits.
+- Team: $129/month or $1,290/year, five seats, 100 clients/audits, 5 GB, invitations and roles.
 
-### Supported imports
+Provider fees are incurred only after revenue. Before accepting the first paid production customer, upgrade Supabase to Pro for backups and non-pausing production infrastructure.
 
-Templates are downloadable from the import screen:
+### Deployment
 
-- Invoices: client name, invoice number, invoice date, amount; optional due date, billed hours, billed rate, and status.
-- Payments: client name, invoice number, payment date, and amount.
-- Time entries: client name, date, and hours; optional billable/invoiced flags, invoice number, and description.
-- Contracts: text-based PDFs. Detected client, rate, retainer, included hours, payment terms, annual increase, and dates must be reviewed and confirmed by a person.
+`pnpm auditor:build` emits the static application into `revenue-auditor/`. The Pages workflow assembles the portfolio and deploys it with `actions/deploy-pages`.
 
-CSV headers are mapped interactively, so source column names may differ. Dates accept `YYYY-MM-DD` or `MM/DD/YYYY`. Monetary values accept plain numbers, common currency symbols, commas, and accounting-style parentheses. Each audit has one confirmed reporting currency (USD, EUR, GBP, CAD, or AUD); currency conversion is intentionally not performed.
+Configure these GitHub Pages variables: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPPORT_EMAIL`, `AUTH_FROM_EMAIL`, `TURNSTILE_SITE_KEY`, and `EMAIL_AUTH_ENABLED`. Add all server secrets from `supabase/.env.example` with `supabase secrets set --env-file supabase/.env`.
 
-### Methodology and limitations
+GitHub repository settings must use **GitHub Actions** as the Pages source. Supabase redirect URLs must include the production and localhost paths in `supabase/config.toml`.
 
-Findings are deterministic and expose their calculation, evidence, severity, confidence, and recommended next action. Missing confirmed values produce incomplete findings instead of invented dollar estimates. Duplicate imports are skipped using stable business keys.
+### External launch gates
 
-The MVP does not perform OCR, currency conversion, tax analysis, contract interpretation, or accounting reconciliation beyond the disclosed rules. It cannot account for credits, discounts, side agreements, or verbal scope changes. Results are decision support, not accounting or legal advice, and should be checked against source systems.
+Implementation is complete without embedding credentials. Public launch still requires operator-owned external state:
+
+1. Create the production Supabase project and apply migrations/functions.
+2. Configure the verified SendGrid sender/support address, then set `VITE_EMAIL_AUTH_ENABLED=true`.
+3. Create Stripe products/prices, webhook, Connect application, and live account.
+4. Create Intuit sandbox/production applications and complete production review.
+5. Review legal copy and set the initial platform administrator in `profiles`.
+6. Enable GitHub Actions Pages deployment and run the launch smoke test.
+
+Do not upload HIPAA-regulated data, payment-card numbers, or data requiring a specialized compliance agreement. Findings remain decision support, not accounting, collections, tax, or legal advice.
 
 Cognitive Multiplexer is a working Python prototype of a modular AI runtime.
 It is inspired by the idea:

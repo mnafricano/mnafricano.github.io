@@ -1,0 +1,5 @@
+Contact: https://mnafricano.github.io/revenue-auditor/legal/?doc=security
+Policy: https://mnafricano.github.io/revenue-auditor/legal/?doc=security
+Preferred-Languages: en
+Canonical: https://mnafricano.github.io/revenue-auditor/.well-known/security.txt
+Expires: 2027-06-28T00:00:00.000Z
