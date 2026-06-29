@@ -59,7 +59,7 @@ Provider fees are incurred only after revenue. Before accepting the first paid p
 
 `pnpm auditor:build` emits the static application into `revenue-auditor/`. The Pages workflow assembles the portfolio and deploys it with `actions/deploy-pages`.
 
-Configure these GitHub Pages variables: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPPORT_EMAIL`, `AUTH_FROM_EMAIL`, `TURNSTILE_SITE_KEY`, and `EMAIL_AUTH_ENABLED`. Add all server secrets from `supabase/.env.example` with `supabase secrets set --env-file supabase/.env`.
+Configure these GitHub Pages variables: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPPORT_EMAIL`, `AUTH_FROM_EMAIL`, and optionally `TURNSTILE_SITE_KEY`. Add all server secrets from `supabase/.env.example` with `supabase secrets set --env-file supabase/.env`.
 
 GitHub repository settings must use **GitHub Actions** as the Pages source. Supabase redirect URLs must include the production and localhost paths in `supabase/config.toml`.
 

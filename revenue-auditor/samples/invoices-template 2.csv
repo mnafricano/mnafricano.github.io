@@ -1,3 +1,0 @@
-client_name,invoice_number,invoice_date,due_date,amount,hours,rate,status
-Acme Health,AH-1042,2026-04-01,2026-05-01,6500.00,35,185.00,sent
-Cedar & Co.,CC-220,2026-05-10,2026-05-25,4200.00,24,175.00,partial

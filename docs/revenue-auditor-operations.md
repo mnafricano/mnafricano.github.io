@@ -8,7 +8,7 @@
 
 ## Required production settings
 
-Configure the frontend build with `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`, `VITE_APP_URL`, `VITE_SUPPORT_EMAIL`, `VITE_AUTH_FROM_EMAIL`, `VITE_TURNSTILE_SITE_KEY`, and `VITE_EMAIL_AUTH_ENABLED=true`. Keep registration disabled until the support address, verified SMTP sender, and free Cloudflare Turnstile site are working.
+Configure the frontend build with `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`, `VITE_APP_URL`, `VITE_SUPPORT_EMAIL`, and optionally `VITE_TURNSTILE_SITE_KEY`. Email signup is controlled by Supabase Auth; configure the verified SMTP sender before inviting production customers.
 
 Configure Supabase function secrets from `supabase/.env.example`. Set the scheduled-maintenance request authorization in the scheduler and run the schedule at least daily. Configure Stripe's webhook endpoint for the deployed `stripe-webhook` function and subscribe to Checkout and customer-subscription lifecycle events.
 

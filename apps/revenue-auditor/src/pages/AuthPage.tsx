@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import type { AppIdentity } from "../App";
 import { href } from "../App";
-import { config, isCloudConfigured, isEmailLaunchReady } from "../config";
+import { config, isCloudConfigured } from "../config";
 import { PublicLayout } from "../components/PublicShell";
 import { Captcha } from "../components/Captcha";
 import { supabase } from "../lib/supabase";
@@ -62,39 +62,43 @@ export function AuthPage({ identity }: { identity: AppIdentity }) {
     setError("");
     setMessage("");
     try {
+      const captchaOptions = config.turnstileSiteKey
+        ? { captchaToken }
+        : undefined;
       if (mode === "login") {
         const { error: authError } = await supabase.auth.signInWithPassword({
           email,
           password,
-          options: { captchaToken },
+          options: captchaOptions,
         });
         if (authError) throw authError;
         window.location.assign(parameters.get("next") || href("app"));
       } else if (mode === "signup") {
-        if (!isEmailLaunchReady)
-          throw new Error(
-            "Email registration is disabled until the verified sender and abuse protection are configured.",
-          );
         if (!consent)
           throw new Error(
             "Accept the Terms and Privacy Policy to create an account.",
           );
-        const { error: authError } = await supabase.auth.signUp({
+        const { data, error: authError } = await supabase.auth.signUp({
           email,
           password,
           options: {
-            captchaToken,
+            ...captchaOptions,
             emailRedirectTo: `${config.appUrl}login/?mode=login`,
             data: { display_name: name, consent_version: "2026-06-28" },
           },
         });
         if (authError) throw authError;
-        setMessage("Check your email to confirm the account.");
+        if (data.session) {
+          await identity.refresh();
+          window.location.assign(href("app"));
+        } else {
+          setMessage("Check your email to confirm the account.");
+        }
       } else if (mode === "reset") {
         const { error: authError } = await supabase.auth.resetPasswordForEmail(
           email,
           {
-            captchaToken,
+            ...captchaOptions,
             redirectTo: `${config.appUrl}login/?mode=update`,
           },
         );
@@ -170,9 +174,9 @@ export function AuthPage({ identity }: { identity: AppIdentity }) {
             <div className="notice warning">
               <strong>Launch preview</strong>
               <p>
-                Cloud credentials are intentionally absent from this build.
-                Account buttons are wired and activate when production
-                environment variables are supplied.
+                This build is not connected to Supabase yet. Account creation
+                activates as soon as the production project URL and publishable
+                key are supplied.
               </p>
             </div>
           )}
@@ -259,10 +263,7 @@ export function AuthPage({ identity }: { identity: AppIdentity }) {
               </label>
             )}
             {mode !== "update" && <Captcha onToken={setCaptchaToken} />}
-            <button
-              className="button primary full"
-              disabled={busy || (mode === "signup" && !isEmailLaunchReady)}
-            >
+            <button className="button primary full" disabled={busy}>
               {busy
                 ? "Working…"
                 : mode === "signup"

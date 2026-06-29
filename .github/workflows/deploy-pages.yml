@@ -41,7 +41,6 @@ jobs:
           VITE_AUTH_FROM_EMAIL: ${{ vars.AUTH_FROM_EMAIL }}
           VITE_TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}
           VITE_GOOGLE_AUTH_ENABLED: "true"
-          VITE_EMAIL_AUTH_ENABLED: ${{ vars.EMAIL_AUTH_ENABLED || 'false' }}
       - name: Assemble static site
         run: |
           mkdir _site

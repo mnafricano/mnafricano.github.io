@@ -22,9 +22,18 @@ test("auth surface explains its launch configuration safely", async ({
   await expect(
     page.getByRole("heading", { name: /Sign in to continue/i }),
   ).toBeVisible();
+  await expect(page.getByText(/not connected to Supabase yet/i)).toBeVisible();
+});
+
+test("completed signup form enables account creation", async ({ page }) => {
+  await page.goto("./login/?mode=signup");
+  await page.getByLabel("Full name").fill("Taylor Morgan");
+  await page.getByLabel("Email address").fill("taylor@example.com");
+  await page.getByLabel(/Password/).fill("correct-horse-battery-staple");
+  await page.getByRole("checkbox").check();
   await expect(
-    page.getByText(/Cloud credentials are intentionally absent/i),
-  ).toBeVisible();
+    page.getByRole("button", { name: "Create account" }),
+  ).toBeEnabled();
 });
 
 test("mobile product has no horizontal overflow", async ({ page }) => {
