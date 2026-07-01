@@ -4,6 +4,8 @@
 *.egg-info/
 __pycache__/
 *.pyc
+/build/
+/dist/
 node_modules/
 apps/revenue-auditor/test-results/
 apps/revenue-auditor/playwright-report/

@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.coverage
+data/*.json
+logs/*.jsonl
+dist/
+.DS_Store

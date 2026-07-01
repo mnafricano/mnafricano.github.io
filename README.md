@@ -1,5 +1,70 @@
 # Cognitive Multiplexer
 
+## Erome Public-Feed Archiver
+
+The repository also contains a local-only Python service that watches Erome's public
+`/explore/new` feed, baselines existing albums, and archives media from albums that
+appear afterward. It uses a restart-safe SQLite queue, pauses below 10 GB of free
+disk space, and exposes a dashboard only on `127.0.0.1:8765`.
+
+Only download content you are legally entitled to keep. The service does not sign
+in, access private albums, bypass access controls, or redistribute files.
+
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+erome-archiver serve
+```
+
+Open `http://127.0.0.1:8765`. On macOS, enable automatic startup at login with:
+
+```bash
+erome-archiver install
+```
+
+Stop and remove the login service with `erome-archiver uninstall`. State and logs
+live in `~/Library/Application Support/Erome Archiver`; downloaded albums default
+to `~/Downloads/Erome Archive`.
+
+Each album folder contains `album.json` and `media-metadata.json`. The metadata
+sidecar records source URLs, selected response headers, file sizes, SHA-256 hashes,
+image dimensions and EXIF, plus available video container fields such as duration,
+dimensions, frame rate, bitrate, dates, and tags. Existing completed albums are
+enriched automatically in the background after upgrading. Albums containing GPS
+or other location metadata are renamed with a leading `📍 `.
+
+Open `http://127.0.0.1:8765/library` or choose **Saved Library** from the dashboard
+to search completed albums and expand them into local picture/video galleries.
+Choose **Shuffle Feed** for a full-screen, snap-scrolling random mix of locally
+saved pictures and videos. Videos play muted while centered. Every feed item has
+an album-level delete action that first displays the complete album and requires
+a second explicit confirmation before permanently removing its folder.
+Files larger than 500 MB are stopped before their bodies are downloaded and shown
+in the dashboard with an available poster/thumbnail, exact size, and **Download
+file** or **Skip file** controls. The decision is stored in SQLite and survives
+restarts. If a server omits the file size, the transfer stops at the 500 MB boundary
+and waits for the same approval.
+
+Multiple albums can download simultaneously (three by default, configurable from
+1–10). Together they share a global pool of up to 10 parallel media-file transfers,
+also configurable from 1–10. Every active album has its own progress bar and
+**Cancel download** action. Confirming it stops only that album's in-flight
+transfers, removes its completed and partial files, and leaves the album marked
+canceled so it is not automatically queued again.
+
+### Double-clickable M4 Mac app
+
+On an Apple Silicon Mac, build a standalone application bundle with:
+
+```bash
+./scripts/build-erome-archiver-macos.sh
+```
+
+The finished `dist/Erome Archiver.app` can be moved to `/Applications` and opened
+like any other Mac app. It contains Python and all runtime dependencies; the source
+repository and virtual environment are not required after the app is built.
+
 ## Revenue Leak Auditor
 
 Revenue Leak Auditor is a multi-tenant SaaS for service businesses. It compares contracts, invoices, payments, and time entries to surface explainable unbilled work, underbilling, overdue balances, retainer gaps, missed increases, renewal risk, and scope creep.

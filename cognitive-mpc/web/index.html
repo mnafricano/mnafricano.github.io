@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="A local conversational interface for the Cognitive MPC runtime."
+    >
+    <title>Cognitive MPC</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="Conversation sidebar">
+        <div class="brand-row">
+          <div class="brand-mark" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <div>
+            <div class="brand-name">Cognitive MPC</div>
+            <div class="brand-kicker">LOCAL CONTROL RUNTIME</div>
+          </div>
+          <button class="icon-button sidebar-close" id="sidebar-close" aria-label="Close sidebar">
+            ×
+          </button>
+        </div>
+
+        <button class="new-chat-button" id="new-chat">
+          <span aria-hidden="true">＋</span>
+          <span>New chat</span>
+          <kbd>⌘ K</kbd>
+        </button>
+
+        <div class="sidebar-label">CONVERSATIONS</div>
+        <nav class="conversation-list" id="conversation-list" aria-label="Conversations"></nav>
+
+        <div class="sidebar-label">WORKBENCH</div>
+        <nav class="workbench-nav" aria-label="Workbench tools">
+          <button type="button" data-panel="approvals">
+            <span>✓</span> Approvals <b id="approval-count">0</b>
+          </button>
+          <button type="button" data-panel="memories"><span>◎</span> Memory</button>
+          <button type="button" data-panel="backups"><span>↺</span> Backups</button>
+          <button type="button" data-panel="settings"><span>⚙</span> Settings</button>
+        </nav>
+
+        <div class="runtime-card">
+          <div class="runtime-heading">
+            <span class="status-dot"></span>
+            <span>Runtime online</span>
+            <span class="local-pill">LOCAL</span>
+          </div>
+          <div class="runtime-grid">
+            <div>
+              <strong id="cycle-count">0</strong>
+              <span>cycles</span>
+            </div>
+            <div>
+              <strong id="memory-count">0</strong>
+              <span>memories</span>
+            </div>
+            <div>
+              <strong id="skill-count">0</strong>
+              <span>skills</span>
+            </div>
+          </div>
+          <div class="permission-row">
+            <span>Shell permission</span>
+            <span class="permission-value" id="shell-status">Disabled</span>
+          </div>
+          <div class="permission-row">
+            <span>Response engine</span>
+            <span class="permission-value" id="model-status">Checking…</span>
+          </div>
+          <div class="permission-row stacked">
+            <span>Workspace</span>
+            <span class="permission-value path-value" id="workspace-status">Not selected</span>
+          </div>
+          <div class="permission-row">
+            <span>Maintenance</span>
+            <span class="permission-value" id="maintenance-status">Idle</span>
+          </div>
+        </div>
+      </aside>
+
+      <div class="sidebar-scrim" id="sidebar-scrim"></div>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <button class="icon-button menu-button" id="menu-button" aria-label="Open sidebar">
+            ☰
+          </button>
+          <div class="conversation-heading">
+            <strong id="conversation-title">New chat</strong>
+            <span>Receding-horizon agent</span>
+          </div>
+          <div class="topbar-badges">
+            <span class="topbar-badge"><span class="status-dot"></span> Online</span>
+            <span class="topbar-badge quiet" id="model-badge">Checking model…</span>
+            <button class="topbar-action" type="button" data-panel="settings">Settings</button>
+          </div>
+        </header>
+
+        <section class="chat-region" id="chat-region" aria-live="polite">
+          <div class="empty-state" id="empty-state">
+            <div class="hero-mark" aria-hidden="true">
+              <div class="orbit orbit-one"></div>
+              <div class="orbit orbit-two"></div>
+              <div class="hero-core"></div>
+            </div>
+            <p class="eyebrow">COGNITIVE MODEL-PREDICTIVE CONTROL</p>
+            <h1>What should we work toward?</h1>
+            <p class="hero-copy">
+              Give me a goal. I’ll generate competing plans, simulate their outcomes,
+              verify their assumptions, and commit to one next action.
+            </p>
+            <div class="model-notice" id="model-notice" hidden>
+              <span class="model-notice-icon">!</span>
+              <span>
+                <strong id="model-notice-title">Template response mode</strong>
+                <small id="model-notice-detail"></small>
+              </span>
+            </div>
+            <div class="suggestion-grid">
+              <button class="suggestion" data-prompt="Build a sustainable cybersecurity learning routine.">
+                <span class="suggestion-icon">⌁</span>
+                <span>
+                  <strong>Build a learning routine</strong>
+                  <small>Compare foundation, practice, and project paths</small>
+                </span>
+                <span class="arrow">→</span>
+              </button>
+              <button class="suggestion" data-prompt="Create a safe plan for prototyping a local developer tool.">
+                <span class="suggestion-icon">◇</span>
+                <span>
+                  <strong>Plan a local prototype</strong>
+                  <small>De-risk assumptions before implementation</small>
+                </span>
+                <span class="arrow">→</span>
+              </button>
+              <button class="suggestion" data-prompt="Organize a difficult project into reversible next actions.">
+                <span class="suggestion-icon">↗</span>
+                <span>
+                  <strong>Untangle a project</strong>
+                  <small>Turn ambiguity into a testable action horizon</small>
+                </span>
+                <span class="arrow">→</span>
+              </button>
+            </div>
+          </div>
+          <div class="message-list" id="message-list"></div>
+          <div class="thinking-row" id="thinking-row" hidden>
+            <div class="avatar assistant-avatar">C</div>
+            <div class="thinking-card">
+              <span></span><span></span><span></span>
+              <small id="phase-status">Planning, simulating, and verifying…</small>
+            </div>
+          </div>
+        </section>
+
+        <section class="composer-section">
+          <div class="approval-stack" id="approval-stack"></div>
+          <div class="pending-banner" id="pending-banner" hidden>
+            <span class="pending-icon">↻</span>
+            <span>
+              <strong>Awaiting an observation</strong>
+              <small id="pending-action"></small>
+            </span>
+          </div>
+          <div class="intent-chips" id="intent-chips" aria-label="Message mode">
+            <button type="button" class="active" data-mode="auto">Auto</button>
+            <button type="button" data-mode="goal">Goal</button>
+            <button type="button" data-mode="observation">Result</button>
+            <button type="button" data-mode="question">Question</button>
+            <button type="button" data-mode="command">Command</button>
+          </div>
+          <form class="composer" id="composer">
+            <textarea
+              id="message-input"
+              rows="1"
+              maxlength="10000"
+              aria-label="Message Cognitive MPC"
+              placeholder="Describe a goal…"
+            ></textarea>
+            <button class="send-button" id="send-button" type="submit" aria-label="Send message">
+              ↑
+            </button>
+          </form>
+          <p class="composer-note" id="composer-note">
+            Inspectable MPC decisions with an optional local response model.
+          </p>
+        </section>
+      </main>
+
+      <aside class="inspector" id="inspector" aria-label="Decision trace" aria-hidden="true">
+        <div class="inspector-header">
+          <div>
+            <p class="eyebrow">INSPECTABLE REASONING</p>
+            <h2>Decision trace</h2>
+          </div>
+          <button class="icon-button" id="inspector-close" aria-label="Close decision trace">×</button>
+        </div>
+        <div class="inspector-content" id="inspector-content"></div>
+      </aside>
+      <div class="inspector-scrim" id="inspector-scrim"></div>
+
+      <aside class="workbench-panel" id="workbench-panel" aria-hidden="true">
+        <div class="workbench-header">
+          <div>
+            <p class="eyebrow">LOCAL WORKBENCH</p>
+            <h2 id="workbench-title">Settings</h2>
+          </div>
+          <button class="icon-button" id="workbench-close" aria-label="Close workbench">×</button>
+        </div>
+        <div class="workbench-content" id="workbench-content"></div>
+      </aside>
+      <div class="workbench-scrim" id="workbench-scrim"></div>
+    </div>
+
+    <div class="toast" id="toast" role="alert" hidden></div>
+    <script src="/app.js" defer></script>
+  </body>
+</html>

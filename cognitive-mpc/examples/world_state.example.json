@@ -1,0 +1,44 @@
+{
+  "active_tasks": [
+    {
+      "created_at": "2026-06-30T15:00:00+00:00",
+      "description": "Create a 7-day networking sprint with one practical lab per day.",
+      "goal_id": "goal_example",
+      "id": "task_example",
+      "result": null,
+      "source_plan_id": "plan_example",
+      "status": "awaiting_observation",
+      "updated_at": "2026-06-30T15:00:00+00:00"
+    }
+  ],
+  "cycle_count": 1,
+  "environment_facts": {
+    "available_resources": [
+      "local computer",
+      "note writer"
+    ],
+    "shell_enabled": false
+  },
+  "long_term_beliefs": {
+    "preference:applied-learning": {
+      "confidence": 0.72,
+      "content": "User learns best through applied projects, practical labs, and concrete feedback.",
+      "evidence_count": 3,
+      "updated_at": "2026-06-30T15:00:00+00:00"
+    }
+  },
+  "recent_observations": [],
+  "uncertainty": {
+    "goal_example": 0.5
+  },
+  "updated_at": "2026-06-30T15:00:00+00:00",
+  "user_goals": [
+    {
+      "created_at": "2026-06-30T15:00:00+00:00",
+      "id": "goal_example",
+      "status": "active",
+      "text": "Learn networking fundamentals for cybersecurity."
+    }
+  ],
+  "version": 1
+}

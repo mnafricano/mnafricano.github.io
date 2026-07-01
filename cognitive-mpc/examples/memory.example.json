@@ -1,0 +1,63 @@
+{
+  "episodic": [
+    {
+      "content": "Observation: the practical packet-analysis lab worked and made the concept clearer.",
+      "id": "mem_episode_example",
+      "importance": 0.8,
+      "kind": "episodic",
+      "metadata": {
+        "outcome": "success",
+        "pattern_key": "preference:applied-learning",
+        "semantic_summary": "User learns best through applied projects, practical labs, and concrete feedback.",
+        "surprise": 0.2
+      },
+      "source_episode_ids": [],
+      "tags": [
+        "observation",
+        "success"
+      ],
+      "timestamp": "2026-06-30T15:00:00+00:00"
+    }
+  ],
+  "procedural": [
+    {
+      "content": "For learning goals, pair each concept with a safe practical lab and an explicit pass/fail check.",
+      "id": "mem_procedure_example",
+      "importance": 0.9,
+      "kind": "procedural",
+      "metadata": {
+        "pattern_key": "strategy:concept-plus-lab",
+        "success_count": 3
+      },
+      "source_episode_ids": [
+        "mem_episode_example"
+      ],
+      "tags": [
+        "crystallized-skill",
+        "learning"
+      ],
+      "timestamp": "2026-06-30T15:00:00+00:00"
+    }
+  ],
+  "semantic": [
+    {
+      "content": "User learns best through applied projects, practical labs, and concrete feedback.",
+      "id": "mem_semantic_example",
+      "importance": 0.8,
+      "kind": "semantic",
+      "metadata": {
+        "evidence_count": 3,
+        "pattern_key": "preference:applied-learning"
+      },
+      "source_episode_ids": [
+        "mem_episode_example"
+      ],
+      "tags": [
+        "consolidated",
+        "preference"
+      ],
+      "timestamp": "2026-06-30T15:00:00+00:00"
+    }
+  ],
+  "version": 1
+}
